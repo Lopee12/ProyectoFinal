@@ -1,27 +1,54 @@
-<div class="card">
-    <table class="ventas-table">
-        <thead>
+
+<div class="relative mx-10 overflow-x-auto shadow-md sm:rounded-lg my-6 ">
+
+    <table class="w-full table-fixed text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs uppercase bg-blue-500 text-gray-200">
             <tr>
-                <th>Fecha</th>
-                <th>Productos</th>
-                <th>Total</th>
+                <th scope="col" class="px-6 py-3">
+                    Fecha
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Vendedor
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Productos
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Total
+                </th>
+                              
             </tr>
         </thead>
+
         <tbody>
-            <tr *ngFor="let venta of listaVentas" class="ventas-header">
-                <td>{{ venta.fecha }}</td>
-                <td>
-                    <table class="productos-table">
+          @for (venta of listaVentas; track $index){
+            <tr class="bg-white border-b hover:bg-gray-50  dark:bg-blue-950">
+
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                  {{venta.fecha}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                  {{venta.vendedor}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white"> 
+                    <table>
                         <ul>
                             @for (producto of venta.productos; track $index) {
-                            <li>{{producto.cantidad + "x " + producto.nombre}}</li>
+                            <li>
+                                {{producto.cantidad + "x " + producto.nombre}}
+                            </li>
                             }
                         </ul>
                     </table>
                 </td>
-                <td>{{ venta.total }}</td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white ">
+                    {{venta.total}}
+                </td>
             </tr>
+            }
         </tbody>
     </table>
-    <button routerLink="/">Volver al menu</button>
-</div>
+  </div>

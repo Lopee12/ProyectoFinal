@@ -4,6 +4,7 @@ import { ProductoService } from '../../../services/producto.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Producto } from '../../../interfaces/Producto.interface';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-modificar-producto',
@@ -15,6 +16,7 @@ import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 export class ModificarProductoComponent implements OnInit {
   constructor(private productosService: ProductoService) {}
 
+  toastr = inject(ToastrService);
   fb = inject(FormBuilder);
   ar = inject(ActivatedRoute);
   id: string = 'default';
@@ -38,7 +40,8 @@ export class ModificarProductoComponent implements OnInit {
     this.ar.paramMap.subscribe({
       next: (param) => {
         this.id = param.get('id') ?? 'default';
-        this.setearFormulario(this.id ?? '');
+        console.log(this.id);
+        this.setearFormulario(this.id);
       },
       error: (err) => {
         console.log(err.message);
@@ -49,6 +52,7 @@ export class ModificarProductoComponent implements OnInit {
   setearFormulario(id: string) {
     this.productosService.getProductoById(id).subscribe({
       next: (prod) => {
+        this.formulario.controls['id'].setValue(prod.id);
         this.formulario.controls['nombre'].setValue(prod.nombre);
         this.formulario.controls['precio'].setValue(prod.precio ?? 0);
         this.formulario.controls['categoria'].setValue(prod.categoria);
@@ -58,16 +62,20 @@ export class ModificarProductoComponent implements OnInit {
   }
 
   actualizarProducto() {
-    if (this.formulario.invalid) return;
+    if (this.formulario.invalid) {
+      this.toastr.error('Error al actualizar el producto');
+      return;
+    }
 
     const prod = this.formulario.getRawValue();
+    console.log(prod);
     this.updateProd(prod);
   }
 
   updateProd(prod: Producto) {
     this.productosService.putProducto(prod).subscribe({
       next: () => {
-        alert('El producto se actualizo correctamente');
+        this.toastr.success('El producto se actualizo correctamente');
       },
       error(err) {
         console.log(err.message);

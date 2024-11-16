@@ -1,42 +1,70 @@
-<section>
-    <form [formGroup]="formulario">
-        <legend> Cargar un nuevo usuario </legend>
+<section class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md  dark:bg-blue-900 dark:text-white">
+    <form [formGroup]="formulario" class="space-y-4" (ngSubmit)="addUsuario()">
+        <legend class="text-lg font-semibold mb-4">Formulario de usuario</legend>
 
-        
-        <label id="nombreUsuario" >Nombre Usuario:</label>
-        <input type="text"  formControlName="nombreUsuario">
-        @if (formulario.controls['nombreUsuario'].getError('required') && formulario.controls['nombreUsuario'].touched) {
-            <div>
+        <div>
+            <label for="nombreUsuario" class="block text-sm font-medium text-gray-700 dark:text-white">Nombre de
+                Usuario:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <input type="text" placeholder="Escribe un nombre de usuario..." formControlName="nombreUsuario"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
+            @if(formulario.controls['nombreUsuario'].getError('required') &&
+            formulario.controls['nombreUsuario'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
                 Campo requerido
             </div>
-        }
+            }
+        </div>
 
-        <label id="clave" >Clave:</label>
-        <input type="password" formControlName="contrasena">
-        @if (formulario.controls['contrasena'].getError('required')  && formulario.controls['contrasena'].touched) {
-            <div>
+        <div>
+            <label for="contrasena" class="block text-sm font-medium text-gray-700 dark:text-white">Contraseña:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <input type="password" placeholder="Escribe una contraseña..." formControlName="contrasena"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
+            @if(formulario.controls['contrasena'].getError('required') && formulario.controls['contrasena'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
                 Campo requerido
             </div>
-        }
+            }
+        </div>
 
-
-        <label for="tipoUsuario">Tipo de Usuario:</label>
-        <select id="tipoUsuario" formControlName="tipoUsuario">
-            <option value="" disabled selected>Seleccione el rol...</option>
-            <option value="administrador">Administrador</option>
-            <option value="supervisor">Supervisor</option>
-            <option value="encargado">Encargado</option>
-            <option value="vendedor">Vendedor</option>
-
-        </select>
-        @if (formulario.controls['tipoUsuario'].getError('required')  && formulario.controls['tipoUsuario'].touched) {
-            <div>
-                Campo requerido
+        <div>
+            <label for="tipoUsuario" class="block text-sm font-medium text-gray-700 dark:text-white">Tipo de
+                Usuario:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <select formControlName="tipoUsuario"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                    <option [ngValue]="null" disabled>Seleccione un tipo de usuario...</option>
+                    <option *ngFor="let tipoUsuario of listaTipos" [ngValue]="tipoUsuario">{{tipoUsuario}}</option>
+                </select>
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
             </div>
-        }
+        </div>
 
-        <button (click)="addUsuario()">Agregar</button>
-        <button routerLink = "/MenuAdministrador">Volver al menu</button>
-
+        <div class="flex justify-end">
+            <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Agregar Usuario
+            </button>
+        </div>
     </form>
 </section>

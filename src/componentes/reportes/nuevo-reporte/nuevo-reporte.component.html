@@ -1,34 +1,74 @@
-<h1>{{dia}}</h1>
-<table style="width: 100%; border-collapse: collapse;">
-    <thead>
-        <tr>
-            <th class="header" (click)="ordenarPor('nombre')">Nombre</th>
-            <th class="header" (click)="ordenarPor('precio')">Precio</th>
-            <th class="header" (click)="ordenarPor('cantidad')">Stock</th>
-            <th class="header" (click)="ordenarPor('categoria')">Categoria</th>
-            <th class="header" (click)="ordenarPor('diferencia')">Diferencia</th>
-            <th class="header">Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (producto of productos; track $index){
-        <tr>
-            <td>{{producto.nombre}}</td>
-            <td>{{producto.precio}}</td>
-            <td>{{producto.cantidad}}</td>
-            <td>{{producto.categoria}}</td>
-            <td>{{ (producto.diferencia != 0 || producto.diferencia == null) ? producto.diferencia : "0" }}</td>
-            <td><input *ngIf="producto.id" type="number"
-                    [value]="((producto.diferencia !=null) && producto.cantidad !=null ) ? ((producto.diferencia) + producto.cantidad) : 0"
-                    #subtotalInput (change)="setSubtotal(producto.id.toString() , subtotalInput.value)">
-            </td>
+<div
+    class="relative mx-10 my-6 py-2 px-6 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium overflow-x-auto shadow-md sm:rounded-lg  dark:bg-blue-950  dark:text-white">
+    <p>Fecha del ajuste: {{dia | date: 'dd/MM/yy'}}</p>
+</div>
 
-        </tr>
-        }
-    </tbody>
-</table>
-<button type="button" (click)="enviarDatos()">
-    Enviar Datos
-</button>
+<div class="relative mx-10 my-6 overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full table-fixed text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs uppercase bg-blue-500 text-gray-200">
+            <tr>
+                <th class="header px-6 py-3" (click)="ordenarPor('nombre')" scope="col">
+                    Nombre del producto
+                </th>
+                <th scope="col" class="px-6 py-3 header" (click)="ordenarPor('precio')">
+                    Precio unitario
+                </th>
+                <th scope="col" class="px-6 py-3 header" (click)="ordenarPor('cantidad')">
+                    Stock
+                </th>
+                <th scope="col" class="px-6 py-3 header" (click)="ordenarPor('categoria')">
+                    Categoria
+                </th>
+                <th scope="col" class="px-6 py-3 header" (click)="ordenarPor('diferencia')">
+                    Diferencia
+                </th>
+                <th scope="col" class="px-6 py-3 header">
+                    Subtotal
+                </th>
 
-<button routerLink ="/MenuEncargado">Volver al menu</button>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @for (producto of productos; track $index) {
+            <tr class="bg-white border-b hover:bg-gray-50  dark:bg-blue-950">
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{producto.nombre}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{producto.precio}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{producto.cantidad}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{producto.categoria}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white ">
+                    {{ (producto.diferencia != 0 || producto.diferencia == null) ? producto.diferencia : "0" }}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    <input class="w-full max-w-32 text-center" *ngIf="producto.id" type="number"
+                        [value]="((producto.diferencia !=null) && producto.cantidad !=null ) ? ((producto.diferencia) + producto.cantidad) : 0"
+                        #subtotalInput (change)="setSubtotal(producto.id.toString() , subtotalInput.value)">
+                </td>
+            </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <button type="submit" (click)="enviarDatos()" class="group relative flex justify-center my-5 mx-10 py-2 px-10 
+        border border-transparent text-sm font-medium rounded-md 
+        text-white bg-blue-500 hover:bg-indigo-600 focus:outline-none 
+        focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Enviar ajuste</button>
+</div>

@@ -1,25 +1,71 @@
+<div class="relative mx-10 overflow-x-auto sm:rounded-lg">
+  <div class="flex items-center space-x-4 mb-1">
+    <form [formGroup]="filtroForm" class="flex items-center space-x-2">
+      <label for="categoriaSelect" class="text-sm font-medium text-gray-700 dark:text-white">Filtrar por tipo de
+        usuario:</label>
+      <select formControlName="tipoUsuario"
+        class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-50 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        <option *ngFor="let tipoUsuario of tiposUsuarios" [ngValue]="tipoUsuario">
+          {{ tipoUsuario }}
+        </option>
+      </select>
+    </form>
+    <button (click)="filtrarPorTipoUsuario()"
+      class="group flex justify-center py-2 px-5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+      Aplicar filtro
+    </button>
 
-<div class="card">
-    <table>
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Nombre usuario</th>
-            <th>Tipo de usuario</th>
-          </tr>
-        </thead>
-
-        <tbody>
-            @for (usuario of listaUsuarios; track $index) {
-             <tr>
-                <td>{{usuario.id}}</td>
-                <td>{{usuario.nombreUsuario}}</td>
-                <td>{{usuario.tipoUsuario}}</td>
-                <td><a (click)="delete(usuario.id)">Eliminar</a></td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <button (click)="resetearFiltros()"
+      class="group flex justify-center py-2 px-5 border border-transparent text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+      Resetear filtros
+    </button>
+  </div>
 </div>
 
-<button routerLink = "/MenuAdministrador">Volver al menu</button>
+<div class="relative mx-10 overflow-x-auto shadow-md sm:rounded-lg my-6">
+  <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <thead class="text-xs uppercase bg-blue-500 text-gray-200">
+      <tr>
+        <th app-header-table titulo="Id" campo="id" [campoOrden]="campoOrden" [esAscendente]="esAscendente"
+          (ordenar)="ordenarPor('id')">
+        </th>
+        <th app-header-table titulo="Nombre" campo="nombreUsuario" [campoOrden]="campoOrden"
+          [esAscendente]="esAscendente" (ordenar)="ordenarPor('nombreUsuario')">
+        </th>
+        <th app-header-table titulo="Tipo de usuario" campo="tipoUsuario" [campoOrden]="campoOrden"
+          [esAscendente]="esAscendente" (ordenar)="ordenarPor('tipoUsuario')">
+        </th>
+        <th scope="col" class="px-6 py-3">Acciones
+        </th>
+
+      </tr>
+    </thead>
+    <tbody>
+      @for (usuario of listaFiltrada; track $index){
+      <tr class="bg-white border-b hover:bg-gray-50 dark:bg-blue-950">
+
+        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+          {{usuario.id}}
+        </td>
+
+        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+          {{usuario.nombreUsuario}}
+        </td>
+
+        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+          {{usuario.tipoUsuario}}
+        </td>
+        <td class="px-6 py-4 flex font-medium text-gray-900 whitespace-nowrap">
+          <a class="hover:underline text-red-600 p-1 cursor-pointer" (click)="delete(usuario.id)">
+            <svg class="h-8 w-8 stroke-red-400" xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
+              viewBox="0 0 24 24" fill="none">
+              <path
+                d="M18 6V16.2C18 17.8802 18 18.7202 17.673 19.362C17.3854 19.9265 16.9265 20.3854 16.362 20.673C15.7202 21 14.8802 21 13.2 21H10.8C9.11984 21 8.27976 21 7.63803 20.673C7.07354 20.3854 6.6146 19.9265 6.32698 19.362C6 18.7202 6 17.8802 6 16.2V6M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></a>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>

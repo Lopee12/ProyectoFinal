@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Pedido } from '../../../interfaces/Pedido.interface';
 import { PedidoService } from '../../../services/pedido.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -35,6 +36,7 @@ export class NuevoPedidoComponent {
     productos: [],
   };
 
+  toastr = inject(ToastrService);
   pt = inject(ProductoService);
   fb = inject(FormBuilder);
   ps = inject(PedidoService);
@@ -178,14 +180,14 @@ export class NuevoPedidoComponent {
 
       this.ps.postPedido(this.pedido).subscribe({
         next: () => {
-          alert('Se ingreso correctamente');
+          this.toastr.success('Se ingreso correctamente');
         },
         error: (err) => {
           console.log('Error', err);
         },
       });
     } else {
-      alert('No se ha cargado ningun producto a la venta');
+      this.toastr.error('No se ha cargado ningun producto a la venta');
     }
   }
 }

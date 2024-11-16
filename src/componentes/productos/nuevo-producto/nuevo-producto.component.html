@@ -1,65 +1,124 @@
-<section>
-        <form [formGroup] = "formulario" >
-            <legend>Formulario de productos</legend>
-            
-            <label for="Producto">Producto: </label>
-            <input type = "text" placeholder="Escribe un producto..." formControlName = "nombre">
+<section class="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md dark:bg-blue-900 dark:text-white">
+    <form [formGroup]="formulario" class="space-y-4">
+        <legend class="text-lg font-semibold mb-4">Formulario de productos</legend>
 
-            @if(formulario.controls['nombre'].getError('required')  && formulario.controls['nombre'].touched){
-                <div>
-                    Campo requerido
+        <div>
+            <label for="Producto" class="block text-sm font-medium text-gray-700 dark:text-white">Producto:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <input type="text" placeholder="Escribe un producto..." formControlName="nombre"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-            }   
-
-            <label for="Precio"> Precio: </label>
-            <input type = "number" placeholder="Escribe un precio..." formControlName = "precio">
-
-            @if(formulario.controls['precio'].getError('required')  && formulario.controls['precio'].touched){
-                <div>
-                    Campo requerido
-                </div>
+            </div>
+            @if(formulario.controls['nombre'].getError('required') && formulario.controls['nombre'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
+                Campo requerido
+            </div>
             }
+        </div>
 
-            <label for="Cantidad"> Cantidad: </label>
-            <input type = "number" placeholder="Escribe una cantidad..." formControlName = "cantidad">
-
-            @if(formulario.controls['cantidad'].getError('required')  && formulario.controls['cantidad'].touched){
-                <div>
-                    Campo requerido
+        <div>
+            <label for="Precio" class="block text-sm font-medium text-gray-700 dark:text-white">Precio:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <input type="number" placeholder="Escribe un precio..." formControlName="precio"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
+            </div>
+            @if(formulario.controls['precio'].getError('required') && formulario.controls['precio'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
+                Campo requerido
+            </div>
             }
-
-            <label for="categoria"> Categoria: </label>
-
-            <select formControlName = "categoria" >
-                <option [ngValue]="null" disabled>Ingrese una categoria...</option>
-                <option *ngFor = "let categoria of listaCategorias" [ngValue] = "categoria">{{categoria}}</option>
-            </select>
-            @if(formulario.controls['categoria'].getError('required')  && formulario.controls['categoria'].touched){
-                <div>
-                    Campo requerido
-                </div>
+            @if(formulario.controls['precio'].getError('min') && formulario.controls['cantidad'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
+                No le pagues al que compra
+            </div>
             }
-            
+        </div>
 
-            <div>
-                <button type="button" (click)="deshabilitarCategoria()">Agregar categoria</button>
-                
-                <div *ngIf = "estadoCategoria()">
-                
-                    <input #categoriaInput type = "string" placeholder="Escribe una categoria nueva..." >
-                    <button type="button" (click)="habilitarCategoria()">Cancelar</button>
-                    <button type="button" (click)="cargarDatoCaregorias(categoriaInput.value)">Agregar</button>
+        <div>
+            <label for="Cantidad" class="block text-sm font-medium text-gray-700 dark:text-white">Cantidad:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <input type="number" placeholder="Escribe una cantidad..." formControlName="cantidad"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  dark:bg-blue-800 dark:text-white">
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
                 </div>
-            </div>    
+            </div>
+            @if(formulario.controls['cantidad'].getError('required') && formulario.controls['cantidad'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
+                Campo requerido
+            </div>
+            }
+            @if(formulario.controls['cantidad'].getError('min') && formulario.controls['cantidad'].touched){
+            <div class="text-red-500 text-sm mt-1 dark:bg-red-400 dark:p-2 dark:rounded-md dark:text-white">
+                Tiene que haber mas de uno
+            </div>
+            }
+        </div>
 
-            <button routerLink = "/MenuAdministrador">Volver al menu</button>
-            <button (click) = "addProducto()" >Enviar formulario</button>
-        </form>
+        <div>
+            <label for="categoria" class="block text-sm font-medium text-gray-700 dark:text-white">Categoria:</label>
+            <div class="mt-1 relative rounded-md shadow-sm">
+                <select formControlName="categoria"
+                    class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm dark:bg-blue-800 dark:text-white">
+                    <option class="dark:text-white" [ngValue]="null" disabled>Ingrese una categoria...</option>
+                    <option *ngFor="let categoria of listaCategorias" [ngValue]="categoria">{{categoria}}</option>
+                </select>
 
-    <button class="volverProductos" routerLink = "/ListaProductos">Lista Productos</button>
-    
+                <div class="mt-2">
+                    <button type="button" (click)="deshabilitarCategoria()">Agregar categoria</button>
+                    <div class="flex space-x-2" *ngIf="estadoCategoria()">
+                        <input #categoriaInput
+                            class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  dark:bg-blue-800 dark:text-white"
+                            type="string" placeholder="Escribe una categoria nueva...">
+                        <button type="button" (click)="habilitarCategoria()">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="80px"
+                                height="80px" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                            </svg>
+                        </button>
+                        <button type="button" (click)="cargarDatoCaregorias(categoriaInput.value)">
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="80px" height="80px"
+                                viewBox="0 -0.5 25 25" fill="none">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M18.455 9.8834L7.063 4.1434C6.76535 3.96928 6.40109 3.95274 6.08888 4.09916C5.77667 4.24558 5.55647 4.53621 5.5 4.8764C5.5039 4.98942 5.53114 5.10041 5.58 5.2024L7.749 10.4424C7.85786 10.7903 7.91711 11.1519 7.925 11.5164C7.91714 11.8809 7.85789 12.2425 7.749 12.5904L5.58 17.8304C5.53114 17.9324 5.5039 18.0434 5.5 18.1564C5.55687 18.4961 5.77703 18.7862 6.0889 18.9323C6.40078 19.0785 6.76456 19.062 7.062 18.8884L18.455 13.1484C19.0903 12.8533 19.4967 12.2164 19.4967 11.5159C19.4967 10.8154 19.0903 10.1785 18.455 9.8834V9.8834Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+            </div>
 
 
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit" (click)="addProducto()"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Agregar Producto
+            </button>
+        </div>
+    </form>
 </section>
-

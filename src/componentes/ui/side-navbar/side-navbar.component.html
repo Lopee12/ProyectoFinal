@@ -1,0 +1,139 @@
+<aside class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    aria-label="Sidebar">
+    <div class="flex flex-col justify-between h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-blue-950">
+        <ul class="space-y-2 font-medium">
+            <li>
+                <a routerLink="/"
+                    class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-blue-900 group">
+                    <app-logo className="h-16 w-16 dark:fill-white" routerLink="/" />
+                    <span>
+                        Stock Manager
+                    </span>
+                </a>
+            </li>
+            @if (actualRole == ROLES.VENDEDOR) {
+            <app-item-navbar link="NuevaVenta" texto="Nueva ventas">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                    <path
+                        d="M17 5.923A1 1 0 0 0 16 5h-3V4a4 4 0 1 0-8 0v1H2a1 1 0 0 0-1 .923L.086 17.846A2 2 0 0 0 2.08 20h13.84a2 2 0 0 0 1.994-2.153L17 5.923ZM7 9a1 1 0 0 1-2 0V7h2v2Zm0-5a2 2 0 1 1 4 0v1H7V4Zm6 5a1 1 0 1 1-2 0V7h2v2Z" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="ListaVentas" texto="Ventas">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                    <path
+                        d="M6 8H4M6 16H4M6 12H3M7 4.51555C8.4301 3.55827 10.1499 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C10.1499 21 8.4301 20.4417 7 19.4845M14 9.49991C13.5 9.37589 12.6851 9.37133 12 9.37589M12 9.37589C11.7709 9.37742 11.9094 9.36768 11.6 9.37589C10.7926 9.40108 10.0016 9.73666 10 10.6874C9.99825 11.7002 11 11.9999 12 11.9999C13 11.9999 14 12.2311 14 13.3124C14 14.125 13.1925 14.4811 12.1861 14.599C12.1216 14.599 12.0597 14.5991 12 14.5994M12 9.37589L12 8M12 14.5994C11.3198 14.6022 10.9193 14.6148 10 14.4999M12 14.5994L12 16"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </app-item-navbar>
+            }
+
+            @if (actualRole === ROLES.ADMIN)
+            {
+            <app-item-navbar link="AgregarProducto" texto="Agregar producto">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                        d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="NuevoUsuario" texto="Agregar usuario">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                        d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="ListaUsuarios" texto="Lista usuarios">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24">
+                    <path d="M8,7H22.5a1.5,1.5,0,0,0,0-3H8A1.5,1.5,0,0,0,8,7Z" />
+                    <path d="M22.5,11H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <path d="M22.5,18H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <circle cx="2.5" cy="5.5" r="2.5" />
+                    <circle cx="2.5" cy="12" r="2.5" />
+                    <circle cx="2.5" cy="19" r="2.5" />
+                </svg>
+            </app-item-navbar>
+
+
+            }
+
+            @if (actualRole === ROLES.ENCARGADO || actualRole === ROLES.ADMIN) {
+            <app-item-navbar link="ListaProductos" texto="Lista productos">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24">
+                    <path d="M8,7H22.5a1.5,1.5,0,0,0,0-3H8A1.5,1.5,0,0,0,8,7Z" />
+                    <path d="M22.5,11H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <path d="M22.5,18H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <circle cx="2.5" cy="5.5" r="2.5" />
+                    <circle cx="2.5" cy="12" r="2.5" />
+                    <circle cx="2.5" cy="19" r="2.5" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="ListaReporte" texto="Lista reportes">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" id="Bold" viewBox="0 0 24 24">
+                    <path d="M8,7H22.5a1.5,1.5,0,0,0,0-3H8A1.5,1.5,0,0,0,8,7Z" />
+                    <path d="M22.5,11H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <path d="M22.5,18H8a1.5,1.5,0,0,0,0,3H22.5a1.5,1.5,0,0,0,0-3Z" />
+                    <circle cx="2.5" cy="5.5" r="2.5" />
+                    <circle cx="2.5" cy="12" r="2.5" />
+                    <circle cx="2.5" cy="19" r="2.5" />
+                </svg>
+            </app-item-navbar>
+            }
+
+            @if (actualRole === ROLES.ENCARGADO) {
+            <app-item-navbar link="NuevoPedido" texto="Nuevo pedido">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path
+                        d="M480,224H288V32c0-17.673-14.327-32-32-32s-32,14.327-32,32v192H32c-17.673,0-32,14.327-32,32s14.327,32,32,32h192v192   c0,17.673,14.327,32,32,32s32-14.327,32-32V288h192c17.673,0,32-14.327,32-32S497.673,224,480,224z"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="ListarPedido" texto="Estado de pedidos">
+                <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-name="Layer 1">
+                    <path d="m9.5 24h-8a1.5 1.5 0 0 1 0-3h8a1.5 1.5 0 0 1 0 3z" />
+                    <path d="m7.5 19h-6a1.5 1.5 0 0 1 0-3h6a1.5 1.5 0 0 1 0 3z" />
+                    <path d="m5.5 14h-4a1.5 1.5 0 0 1 0-3h4a1.5 1.5 0 0 1 0 3z" />
+                    <path
+                        d="m14.5 23.722a1.5 1.5 0 0 1 -.354-2.958 9.022 9.022 0 1 0 -10.303-12.622 1.5 1.5 0 0 1 -2.711-1.284 12.023 12.023 0 1 1 13.723 16.821 1.513 1.513 0 0 1 -.355.043z" />
+                    <path
+                        d="m12.5 6a1.5 1.5 0 0 0 -1.5 1.5v4.293a2 2 0 0 0 .586 1.414l1.793 1.793a1.5 1.5 0 0 0 2.121-2.121l-1.5-1.5v-3.879a1.5 1.5 0 0 0 -1.5-1.5z" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="CargarRemito" texto="Cargar remito">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Isolation_Mode" data-name="Isolation Mode"
+                    class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    viewBox="0 0 24 24" width="512" height="512">
+                    <path
+                        d="M21,16H16v5H3V3.409A.41.41,0,0,1,3.409,3H15.172l3-3H3.409A3.413,3.413,0,0,0,0,3.409V24H18.349L24,18.348V5.829l-3,3Z" />
+                    <path d="M5,19H8L23.4,3.6a2.121,2.121,0,0,0-3-3L5,16Z" />
+                </svg>
+            </app-item-navbar>
+            <app-item-navbar link="NuevoReporte" texto="Ajuste de stock">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                    class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                    height="512" viewBox="0 0 24 24" width="512">
+                    <path
+                        d="m15.5 6a1.5 1.5 0 0 1 0 3h-7a1.5 1.5 0 0 1 0-3zm8.061 17.561a1.5 1.5 0 0 1 -2.122 0l-2.011-2.012a4.444 4.444 0 0 1 -1.928.451 4.5 4.5 0 1 1 4.5-4.5 4.444 4.444 0 0 1 -.451 1.928l2.012 2.011a1.5 1.5 0 0 1 0 2.122zm-6.061-4.561a1.5 1.5 0 1 0 -1.5-1.5 1.5 1.5 0 0 0 1.5 1.5zm-6 2h-4a2.5 2.5 0 0 1 -2.5-2.5v-13a2.5 2.5 0 0 1 2.5-2.5h11a.5.5 0 0 1 .5.5v7a1.5 1.5 0 0 0 3 0v-7a3.5 3.5 0 0 0 -3.5-3.5h-11a5.506 5.506 0 0 0 -5.5 5.5v13a5.506 5.506 0 0 0 5.5 5.5h4a1.5 1.5 0 0 0 0-3z" />
+                </svg>
+            </app-item-navbar>
+
+            }
+
+
+        </ul>
+        <div class="flex flex-col items-center pb-4 ">
+            <app-theme-switcher class="py-6"></app-theme-switcher>
+            <app-role-viewer></app-role-viewer>
+        </div>
+
+    </div>
+</aside>

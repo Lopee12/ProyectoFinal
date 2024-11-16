@@ -1,0 +1,12 @@
+<a [routerLink]="routerLink"
+  class="flex group relative h-24 w-24 rounded-xl border-2 border-primary bg-background p-4 transition-all hover:bg-muted items-center justify-center"
+  (mouseenter)="isHovered = true" (mouseleave)="isHovered = false">
+  <div [class.opacity-0]="isHovered" [class.opacity-100]="!isHovered"
+    class="absolute inset-0 flex items-center justify-center fill-slate-300 transition-opacity duration-50">
+    <ng-content></ng-content>
+  </div>
+  <div [class.opacity-100]="isHovered" [class.opacity-0]="!isHovered"
+    class="absolute inset-0 flex items-center justify-center p-2 text-center transition-opacity duration-50">
+    <span class="text-sm font-medium">{{ texto }}</span>
+  </div>
+</a>

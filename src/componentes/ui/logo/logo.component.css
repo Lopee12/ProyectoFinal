@@ -1,0 +1,38 @@
+.cls-1,
+.cls-2,
+.cls-3,
+.cls-4,
+.cls-5,
+.cls-6 {
+  stroke: #8c8c8c;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cls-1,
+.cls-3 {
+  stroke-width: 12px;
+}
+
+.cls-1,
+.cls-2,
+.cls-4,
+.cls-5 {
+  fill-rule: evenodd;
+}
+
+.cls-2 {
+  stroke-width: 7.41px;
+}
+
+.cls-3,
+.cls-4,
+.cls-6 {
+  fill: none;
+}
+
+.cls-4,
+.cls-5,
+.cls-6 {
+  stroke-width: 15.6px;
+}

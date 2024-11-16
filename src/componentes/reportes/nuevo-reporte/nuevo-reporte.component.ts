@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Producto } from '../../../interfaces/Producto.interface';
 import { ProductoService } from '../../../services/producto.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Reporte } from '../../../interfaces/Reporte.interface';
 import { ReporteService } from '../../../services/reporte.service';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-reporte',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule,DatePipe],
   templateUrl: './nuevo-reporte.component.html',
   styleUrl: './nuevo-reporte.component.css',
 })
@@ -25,6 +26,8 @@ export class NuevoReporteComponent {
     private productosService: ProductoService,
     private reporteService: ReporteService
   ) {}
+
+  toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.mostrarLista();
@@ -77,7 +80,7 @@ export class NuevoReporteComponent {
     );
     this.reporteService.postReportes(this.reporte).subscribe({
       next: (rep: Reporte) => {
-        console.log('Reporte creado', rep);
+        this.toastr.success("Reporte creado correctamente","Exito");
         this.productos.forEach((producto) => {
           if (producto.id) {
             producto.diferencia = 0;

@@ -5,6 +5,7 @@ import { ProductoService } from '../../../services/producto.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import * as uuid from 'uuid';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-producto',
@@ -14,7 +15,10 @@ import * as uuid from 'uuid';
   styleUrl: './nuevo-producto.component.css',
 })
 export class NuevoProductoComponent implements OnInit {
-  constructor(private productosService: ProductoService) {}
+  constructor(
+    private toastr: ToastrService,
+    private productosService: ProductoService
+  ) {}
 
   fb = inject(FormBuilder);
   listaProductos: Producto[] = [];
@@ -27,20 +31,22 @@ export class NuevoProductoComponent implements OnInit {
   formulario = this.fb.nonNullable.group({
     id: [uuid.v4()],
     nombre: ['', [Validators.required]],
-    precio: [0, [Validators.required]],
-    cantidad: [0, [Validators.required]],
+    precio: [0, [Validators.required, Validators.min(0)]],
+    cantidad: [0, [Validators.required, Validators.min(1)]],
     categoria: ['', [Validators.required]],
     diferencia: [0, [Validators.required]],
   });
 
   addProducto() {
-    if (this.formulario.invalid) return;
+    if (this.formulario.invalid) {
+      this.showError('Complete Formulario', 'Error al completar el formulario');
+      return;
+    }
 
     const prod = this.formulario.getRawValue();
 
     if (!this.validarNombreProducto(this.formulario.controls['nombre'].value)) {
       this.agregarLista(prod);
-
       this.formulario.reset({
         id: uuid.v4(),
         nombre: '',
@@ -50,7 +56,7 @@ export class NuevoProductoComponent implements OnInit {
         diferencia: 0,
       });
     } else {
-      alert('Nombre existente');
+      this.showError('Error', 'Nombre existente');
     }
 
     return false;
@@ -59,7 +65,10 @@ export class NuevoProductoComponent implements OnInit {
   agregarLista(prod: Producto) {
     this.productosService.postProductos(prod).subscribe({
       next: () => {
-        alert('Producto agregado exitosamente');
+        this.showSuccess(
+          'Producto agregado',
+          'El producto se ha agregado correctamente'
+        );
       },
       error: (err) => {
         console.log('Error', err);
@@ -93,13 +102,19 @@ export class NuevoProductoComponent implements OnInit {
     return this.listaCategorias.some((cate) => (cate = categoria));
   }
 
+  showSuccess(titulo: string, mensaje: string) {
+    this.toastr.success(`${mensaje}`, `${titulo}`);
+  }
+  showError(titulo: string, mensaje: string) {
+    this.toastr.error(`${mensaje}`, `${titulo}`);
+  }
   cargarDatoCaregorias(categoria: string) {
     if (this.buscarCategoria(categoria)) {
       this.listaCategorias.push(categoria);
       this.habilitarCategoria();
-      alert('Se agrego correctamente');
+      this.showSuccess('Categoria agregada', 'Se agrego correctamente');
     } else {
-      alert('La categoria ya existe dentro de la base de datos');
+      this.showError('Error', 'La categoria ya existe');
     }
   }
 

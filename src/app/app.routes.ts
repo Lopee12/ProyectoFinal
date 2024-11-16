@@ -40,6 +40,8 @@ export const routes: Routes = [
   {
     path: 'ModificarProducto/:id',
     component: ModificarProductoPageComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [ROLES.ADMIN] },
   },
   {
     path: 'MenuAdministrador',
