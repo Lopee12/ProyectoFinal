@@ -1,15 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Producto } from '../../../interfaces/Producto.interface';
 import { ProductoService } from '../../../services/producto.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Reporte } from '../../../interfaces/Reporte.interface';
 import { ReporteService } from '../../../services/reporte.service';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-nuevo-reporte',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, DatePipe],
   templateUrl: './nuevo-reporte.component.html',
   styleUrl: './nuevo-reporte.component.css',
 })
@@ -17,14 +19,17 @@ export class NuevoReporteComponent {
   dia = new Date();
   productos: Producto[] = [];
   reporte: Reporte = {
-    id: null,
+    id: uuid.v4(),
     fecha: new Date(),
     productos: new Array<Producto>(),
   };
+
   constructor(
     private productosService: ProductoService,
     private reporteService: ReporteService
   ) {}
+
+  toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.mostrarLista();
@@ -44,9 +49,7 @@ export class NuevoReporteComponent {
 
   listaReporte() {
     this.reporteService.getListaReportes().subscribe({
-      next: (rep) => {
-        console.log('Reportes', rep);
-      },
+      next: (rep) => {},
     });
   }
 
@@ -75,21 +78,30 @@ export class NuevoReporteComponent {
     this.reporte.productos = this.productos.filter(
       (producto) => producto.diferencia !== 0
     );
-    this.reporteService.postReportes(this.reporte).subscribe({
-      next: (rep: Reporte) => {
-        console.log('Reporte creado', rep);
-        this.productos.forEach((producto) => {
-          if (producto.id) {
-            producto.diferencia = 0;
-            this.productosService.putProducto(producto).subscribe({
-              next: (prod: Producto) => {
-                this.mostrarLista();
-              },
-            });
-          }
-        });
-      },
-    });
+
+    if (this.reporte.productos.length != 0) {
+      this.reporteService.postReportes(this.reporte).subscribe({
+        next: (rep: Reporte) => {
+          this.toastr.success('Reporte creado correctamente', 'Exito');
+          this.productos.forEach((producto) => {
+            if (producto.id) {
+              producto.cantidad += producto.diferencia;
+              producto.diferencia = 0;
+              this.productosService.putProducto(producto).subscribe({
+                next: (prod: Producto) => {
+                  this.mostrarLista();
+                },
+              });
+            }
+          });
+        },
+      });
+    } else {
+      this.toastr.error(
+        'No se ha realizado el ajuste de ningun producto',
+        'Error'
+      );
+    }
   }
 
   campoOrden: keyof Producto | null = null;

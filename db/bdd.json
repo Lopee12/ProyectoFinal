@@ -5,45 +5,13 @@
       "nombre": "Camiseta Básica",
       "precio": 15.99,
       "categoria": "Ropa Casual",
-      "cantidad": 88,
-      "diferencia": 0
-    },
-    {
-      "id": "4",
-      "nombre": "Chaqueta de Cuero",
-      "precio": 120,
-      "categoria": "Abrigos",
-      "cantidad": 22,
-      "diferencia": 0
-    },
-    {
-      "nombre": "Falda de Ecocuero",
-      "precio": 75,
-      "cantidad": 29,
-      "categoria": "Faldas",
-      "id": "6",
-      "diferencia": 0
-    },
-    {
-      "id": "12",
-      "nombre": "Blusa Formal",
-      "precio": 40,
-      "categoria": "Ropa Formal",
-      "cantidad": 35,
-      "diferencia": 0
-    },
-    {
-      "id": "14",
-      "nombre": "Sombrero de Paja",
-      "precio": 20,
-      "categoria": "Accesorios",
-      "cantidad": 92,
+      "cantidad": 96,
       "diferencia": 0
     },
     {
       "nombre": "Shorts Deportivos",
       "precio": 18.99,
-      "cantidad": 103,
+      "cantidad": 109,
       "categoria": "Ropa Deportiva",
       "id": "15",
       "diferencia": 0
@@ -51,25 +19,17 @@
     {
       "id": "16",
       "nombre": "Bufanda de Lana",
-      "precio": 15,
+      "precio": 13,
+      "cantidad": 67,
       "categoria": "Accesorios",
-      "cantidad": 61,
       "diferencia": 0
     },
     {
+      "id": "17",
       "nombre": "Pijama de Algodón",
       "precio": 35,
-      "cantidad": 58,
+      "cantidad": 56,
       "categoria": "Ropa Interior",
-      "id": "17",
-      "diferencia": 0
-    },
-    {
-      "id": "18",
-      "nombre": "Pantalón Cargo",
-      "precio": 40.5,
-      "categoria": "Pantalones",
-      "cantidad": 57,
       "diferencia": 0
     },
     {
@@ -77,7 +37,7 @@
       "nombre": "Chaleco Acolchado",
       "precio": 70,
       "categoria": "Abrigos",
-      "cantidad": 39,
+      "cantidad": 44,
       "diferencia": 0
     },
     {
@@ -85,47 +45,30 @@
       "nombre": "Botas de Montaña",
       "precio": 95.99,
       "categoria": "Calzado",
-      "cantidad": 13,
+      "cantidad": 12,
       "diferencia": 0
     },
     {
-      "id": "8bd8c5a3-a82c-43e4-9b34-6d82e777355a",
-      "nombre": "Remera nike",
-      "precio": 50000,
-      "cantidad": 35,
-      "categoria": "Ropa Casual",
+      "id": "4a7671c6-a7fb-4562-9f1e-d18b3aa9604d",
+      "nombre": "Remera Nike",
+      "precio": 15,
+      "cantidad": 7,
+      "categoria": "Ropa Deportiva",
+      "nuevaCategoria": "",
       "diferencia": 0
     }
   ],
   "usuarios": [
     {
-      "id": "a1b2c3d4",
-      "nombreUsuario": "juan_perez",
-      "contrasena": "Ju4nP3r3z!",
-      "tipoUsuario": "administrador"
-    },
-    {
       "id": "e5f6g7h8",
       "nombreUsuario": "maria_gomez",
-      "contrasena": "M4ri4G0m3z#",
+      "contrasena": "12345",
       "tipoUsuario": "supervisor"
     },
     {
       "id": "i9j0k1l2",
       "nombreUsuario": "carlos_ortega",
-      "contrasena": "C@rl0sOrt3g4",
-      "tipoUsuario": "vendedor"
-    },
-    {
-      "id": "m3n4o5p6",
-      "nombreUsuario": "luis_rodriguez",
-      "contrasena": "Lui$R0drigu3z",
-      "tipoUsuario": "encargado"
-    },
-    {
-      "id": "q7r8s9t0",
-      "nombreUsuario": "ana_martinez",
-      "contrasena": "An4M@rt1nez!",
+      "contrasena": "12345",
       "tipoUsuario": "vendedor"
     },
     {
@@ -157,105 +100,64 @@
       "nombreUsuario": "sofi",
       "contrasena": "12345",
       "tipoUsuario": "administrador"
+    },
+    {
+      "id": "5650",
+      "nombreUsuario": "carlos_felipe",
+      "contrasena": "12345",
+      "tipoUsuario": "vendedor"
+    },
+    {
+      "id": "8737",
+      "nombreUsuario": "asdasd",
+      "contrasena": "assdasda",
+      "tipoUsuario": "administrador"
     }
   ],
   "ventas": [
     {
-      "id": "0af9d547-80e6-4bf8-aa81-1f5c9630fe22",
-      "fecha": "12/11/2024",
-      "total": 130,
+      "id": "ed202e87-75ec-4282-b9a1-bf23a1951959",
+      "fecha": "14/11/2024",
+      "total": 80,
       "productos": [
-        {
-          "nombre": "Falda de Ecocuero",
-          "precio": 75,
-          "cantidad": 1,
-          "categoria": "Faldas",
-          "id": "6",
-          "diferencia": 0
-        },
         {
           "id": "14",
           "nombre": "Sombrero de Paja",
           "precio": 20,
           "categoria": "Accesorios",
-          "cantidad": 2,
+          "cantidad": 4,
+          "diferencia": 0
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "5b731801-5a94-4f7e-a1ac-701e5f9a503e",
+      "fecha": "16/11/2024",
+      "total": 50322.49,
+      "productos": [
+        {
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 3,
+          "categoria": "Ropa Interior",
+          "id": "17",
           "diferencia": 0
         },
         {
-          "id": "16",
-          "nombre": "Bufanda de Lana",
-          "precio": 15,
-          "categoria": "Accesorios",
-          "cantidad": 1,
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "d0efc2ae-b055-4a3e-a030-c77493131289",
-      "fecha": "12/11/2024",
-      "total": 180,
-      "productos": [
-        {
-          "id": "12",
-          "nombre": "Blusa Formal",
-          "precio": 40,
-          "categoria": "Ropa Formal",
+          "id": "18",
+          "nombre": "Pantalón Cargo",
+          "precio": 40.5,
+          "categoria": "Pantalones",
           "cantidad": 3,
           "diferencia": 0
         },
         {
-          "id": "16",
-          "nombre": "Bufanda de Lana",
-          "precio": 15,
-          "categoria": "Accesorios",
-          "cantidad": 4,
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "94355435-d3e4-4dbe-9a26-707a0339271a",
-      "fecha": "12/11/2024",
-      "total": 254.95,
-      "productos": [
-        {
-          "id": "12",
-          "nombre": "Blusa Formal",
-          "precio": 40,
-          "categoria": "Ropa Formal",
-          "cantidad": 4,
-          "diferencia": 0
-        },
-        {
-          "nombre": "Shorts Deportivos",
-          "precio": 18.99,
-          "cantidad": 5,
-          "categoria": "Ropa Deportiva",
-          "id": "15",
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "2e999ddf-f61b-4428-ab1a-31b4567702c3",
-      "fecha": "12/11/2024",
-      "total": 50066.98,
-      "productos": [
-        {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
-          "categoria": "Ropa Casual",
-          "cantidad": 2,
-          "diferencia": 0
-        },
-        {
-          "nombre": "Pijama de Algodón",
-          "precio": 35,
+          "id": "20",
+          "nombre": "Botas de Montaña",
+          "precio": 95.99,
+          "categoria": "Calzado",
           "cantidad": 1,
-          "categoria": "Ropa Interior",
-          "id": "17",
           "diferencia": 0
         },
         {
@@ -266,12 +168,69 @@
           "categoria": "Ropa Casual",
           "diferencia": 0
         }
-      ]
+      ],
+      "vendedor": "ana_martinez"
     },
     {
-      "id": "c5a8f645-ae3d-4130-8eaf-b92ee0152b71",
-      "fecha": "12/11/2024",
-      "total": 131.98,
+      "id": "56e7321b-6829-4277-9033-761c004e8bf9",
+      "fecha": "16/11/2024",
+      "total": 150170,
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 15,
+          "categoria": "Accesorios",
+          "cantidad": 2,
+          "diferencia": 0
+        },
+        {
+          "id": "19",
+          "nombre": "Chaleco Acolchado",
+          "precio": 70,
+          "categoria": "Abrigos",
+          "cantidad": 2,
+          "diferencia": -1
+        },
+        {
+          "id": "8bd8c5a3-a82c-43e4-9b34-6d82e777355a",
+          "nombre": "Remera nike",
+          "precio": 50000,
+          "cantidad": 3,
+          "categoria": "Ropa Casual",
+          "diferencia": 0
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "3a5b986c-2858-499d-be49-ef06751e6d2f",
+      "fecha": "16/11/2024",
+      "total": 135,
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 15,
+          "categoria": "Accesorios",
+          "cantidad": 2,
+          "diferencia": 0
+        },
+        {
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 3,
+          "categoria": "Ropa Interior",
+          "id": "17",
+          "diferencia": 0
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "bac6db17-289f-4b4c-9477-58b590f92d36",
+      "fecha": "16/11/2024",
+      "total": 31.98,
       "productos": [
         {
           "id": "1",
@@ -279,43 +238,37 @@
           "precio": 15.99,
           "categoria": "Ropa Casual",
           "cantidad": 2,
+          "diferencia": -9
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "aa22e3af-3a8c-4d8b-8208-e72a1af7002e",
+      "fecha": "17/11/2024",
+      "total": 215.95999999999998,
+      "productos": [
+        {
+          "nombre": "Shorts Deportivos",
+          "precio": 18.99,
+          "cantidad": 4,
+          "categoria": "Ropa Deportiva",
+          "id": "15",
           "diferencia": 0
         },
         {
-          "id": "14",
-          "nombre": "Sombrero de Paja",
-          "precio": 20,
-          "categoria": "Accesorios",
-          "cantidad": 5,
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 4,
+          "categoria": "Ropa Interior",
           "diferencia": 0
         }
-      ]
+      ],
+      "vendedor": "juan.martel"
     }
   ],
   "pedidos": [
-    {
-      "id": "a0f2",
-      "fecha": "10/11/2024",
-      "estado": "Entregado",
-      "productos": [
-        {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
-          "categoria": "Ropa Casual",
-          "cantidad": 2,
-          "diferencia": 0
-        },
-        {
-          "nombre": "Falda de Ecocuero",
-          "precio": 75,
-          "cantidad": 3,
-          "categoria": "Faldas",
-          "id": "6",
-          "diferencia": 0
-        }
-      ]
-    },
     {
       "id": "78af",
       "fecha": "10/11/2024",
@@ -343,60 +296,6 @@
           "precio": 100,
           "cantidad": 4,
           "categoria": "Abrigos",
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "7a39",
-      "fecha": "10/11/2024",
-      "estado": "En preparacion",
-      "productos": [
-        {
-          "id": "14",
-          "nombre": "Sombrero de Paja",
-          "precio": 20,
-          "categoria": "Accesorios",
-          "cantidad": 2,
-          "diferencia": 0
-        },
-        {
-          "nombre": "Pijama de Algodón",
-          "precio": 35,
-          "cantidad": 2,
-          "categoria": "Ropa Interior",
-          "id": "17",
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "1424",
-      "fecha": "10/11/2024",
-      "estado": "En preparacion",
-      "productos": [
-        {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
-          "categoria": "Ropa Casual",
-          "cantidad": 3,
-          "diferencia": 0
-        },
-        {
-          "id": "4",
-          "nombre": "Chaqueta de Cuero",
-          "precio": 120,
-          "categoria": "Abrigos",
-          "cantidad": 1,
-          "diferencia": 0
-        },
-        {
-          "id": "16",
-          "nombre": "Bufanda de Lana",
-          "precio": 15,
-          "categoria": "Accesorios",
-          "cantidad": 1,
           "diferencia": 0
         }
       ]
@@ -458,7 +357,7 @@
     {
       "id": "d14d",
       "fecha": "11/11/2024",
-      "estado": "Aceptado",
+      "estado": "Entregado",
       "productos": [
         {
           "id": "1",
@@ -497,7 +396,7 @@
     {
       "id": "4a2a",
       "fecha": "12/11/2024",
-      "estado": "Aceptado",
+      "estado": "Entregado",
       "productos": [
         {
           "id": "1",
@@ -513,6 +412,261 @@
           "cantidad": 3,
           "categoria": "Faldas",
           "id": "6",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "2c0b",
+      "fecha": "16/11/2024",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 15,
+          "categoria": "Accesorios",
+          "cantidad": 3,
+          "diferencia": 0
+        },
+        {
+          "id": "19",
+          "nombre": "Chaleco Acolchado",
+          "precio": 70,
+          "categoria": "Abrigos",
+          "cantidad": 3,
+          "diferencia": -1
+        },
+        {
+          "id": "8bd8c5a3-a82c-43e4-9b34-6d82e777355a",
+          "nombre": "Remera nike",
+          "precio": 50000,
+          "cantidad": 2,
+          "categoria": "Ropa Casual",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "3cc7",
+      "fecha": "16/11/2024",
+      "estado": "Rechazado",
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 15,
+          "categoria": "Accesorios",
+          "cantidad": 2,
+          "diferencia": 0
+        },
+        {
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 2,
+          "categoria": "Ropa Interior",
+          "id": "17",
+          "diferencia": 0
+        },
+        {
+          "id": "18",
+          "nombre": "Pantalón Cargo",
+          "precio": 40.5,
+          "categoria": "Pantalones",
+          "cantidad": 1,
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "5ab9",
+      "fecha": "17/11/2024",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 1513,
+          "cantidad": 4,
+          "categoria": "Accesorios",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "7511",
+      "fecha": "17/11/2024",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 1513,
+          "cantidad": 3,
+          "categoria": "Accesorios",
+          "diferencia": 0
+        },
+        {
+          "id": "19",
+          "nombre": "Chaleco Acolchado",
+          "precio": 70,
+          "categoria": "Abrigos",
+          "cantidad": 4,
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "493c",
+      "fecha": "17/11/2024",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 1513,
+          "cantidad": 0,
+          "categoria": "Accesorios",
+          "diferencia": 0
+        },
+        {
+          "id": "19",
+          "nombre": "Chaleco Acolchado",
+          "precio": 70,
+          "categoria": "Abrigos",
+          "cantidad": 0,
+          "diferencia": 0
+        },
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 3,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "8bd8c5a3-a82c-43e4-9b34-6d82e777355a",
+          "nombre": "Remera nike",
+          "precio": 50000,
+          "cantidad": 5,
+          "categoria": "Ropa Casual",
+          "diferencia": 0
+        },
+        {
+          "nombre": "Shorts Deportivos",
+          "precio": 18.99,
+          "cantidad": 5,
+          "categoria": "Ropa Deportiva",
+          "id": "15",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "c42b",
+      "fecha": "17/11/2024",
+      "estado": "Rechazado",
+      "productos": [
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 3,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "20",
+          "nombre": "Botas de Montaña",
+          "precio": 95.99,
+          "categoria": "Calzado",
+          "cantidad": 4,
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "4876",
+      "fecha": "17/11/2024",
+      "estado": "Entregado",
+      "productos": [
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 5,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "20",
+          "nombre": "Botas de Montaña",
+          "precio": 95.99,
+          "categoria": "Calzado",
+          "cantidad": 0,
+          "diferencia": 0
+        },
+        {
+          "nombre": "Shorts Deportivos",
+          "precio": 18.99,
+          "cantidad": 5,
+          "categoria": "Ropa Deportiva",
+          "id": "15",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "96be",
+      "fecha": "17/11/2024",
+      "estado": "En espera de confirmacion",
+      "productos": [
+        {
+          "id": "19",
+          "nombre": "Chaleco Acolchado",
+          "precio": 70,
+          "categoria": "Abrigos",
+          "cantidad": 1,
+          "diferencia": 0
+        },
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 1,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 1513,
+          "cantidad": 1,
+          "categoria": "Accesorios",
+          "diferencia": 0
+        }
+      ]
+    },
+    {
+      "id": "216e",
+      "fecha": "17/11/2024",
+      "estado": "En espera de confirmacion",
+      "productos": [
+        {
+          "id": "89024a4c-4b37-4c8f-b212-b982659ba8db",
+          "nombre": "Producto 2",
+          "precio": 19,
+          "cantidad": 1,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "f89d8c06-2f70-49e3-8d5f-92db1b7746a1",
+          "nombre": "croc",
+          "precio": 200,
+          "cantidad": 1,
+          "categoria": "Calzado",
           "diferencia": 0
         }
       ]
@@ -521,7 +675,7 @@
   "reportes": [
     {
       "id": "r001",
-      "fecha": "2024-11-09T04:11:44.363Z",
+      "fecha": "2024-10-09T04:11:44.363Z",
       "productos": [
         {
           "id": "1",
@@ -529,7 +683,7 @@
           "precio": 15.99,
           "categoria": "Ropa Casual",
           "cantidad": 100,
-          "diferencia": 0
+          "diferencia": 3
         },
         {
           "id": "4",
@@ -537,104 +691,72 @@
           "precio": 120,
           "categoria": "Abrigos",
           "cantidad": 25,
-          "diferencia": 0
+          "diferencia": 3
         }
       ]
     },
     {
-      "id": "1d7b",
-      "fecha": "2024-11-09T04:32:39.217Z",
+      "id": "a90dbc0c-0a54-4b52-a50b-70d171c28796",
+      "fecha": "2024-11-18T04:22:15.558Z",
       "productos": [
         {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
+          "id": "16",
+          "nombre": "Bufanda de Lana",
+          "precio": 1513,
+          "cantidad": 67,
+          "categoria": "Accesorios",
+          "diferencia": 3
+        },
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 56,
+          "categoria": "Ropa Interior",
+          "diferencia": -4
+        },
+        {
+          "id": "20",
+          "nombre": "Botas de Montaña",
+          "precio": 95.99,
+          "categoria": "Calzado",
+          "cantidad": 12,
+          "diferencia": -7
+        },
+        {
+          "id": "8bd8c5a3-a82c-43e4-9b34-6d82e777355a",
+          "nombre": "Remera nike",
+          "precio": 50000,
+          "cantidad": 38,
           "categoria": "Ropa Casual",
-          "cantidad": 100,
-          "diferencia": -30
-        },
-        {
-          "id": "4",
-          "nombre": "Chaqueta de Cuero",
-          "precio": 120,
-          "categoria": "Abrigos",
-          "cantidad": 25,
-          "diferencia": 5
-        },
-        {
-          "nombre": "Falda de Ecocuero",
-          "precio": 75,
-          "cantidad": 30,
-          "categoria": "Faldas",
-          "id": "6",
-          "diferencia": -28
-        },
-        {
-          "id": "12",
-          "nombre": "Blusa Formal",
-          "precio": 40,
-          "categoria": "Ropa Formal",
-          "cantidad": 45,
-          "diferencia": 5
-        }
-      ]
-    },
-    {
-      "id": null,
-      "fecha": "2024-11-10T04:19:07.869Z",
-      "productos": [
-        {
-          "id": "4",
-          "nombre": "Chaqueta de Cuero",
-          "precio": 120,
-          "categoria": "Abrigos",
-          "cantidad": 25,
           "diferencia": -1
         },
         {
-          "nombre": "Falda de Ecocuero",
-          "precio": 75,
-          "cantidad": 30,
-          "categoria": "Faldas",
-          "id": "6",
-          "diferencia": 1
+          "id": "f89d8c06-2f70-49e3-8d5f-92db1b7746a1",
+          "nombre": "croc",
+          "precio": 200,
+          "cantidad": 2,
+          "categoria": "Calzado",
+          "diferencia": 18
         },
         {
-          "id": "12",
-          "nombre": "Blusa Formal",
-          "precio": 40,
-          "categoria": "Ropa Formal",
-          "cantidad": 45,
-          "diferencia": -25
-        }
-      ]
-    },
-    {
-      "id": null,
-      "fecha": "2024-11-12T16:07:30.775Z",
-      "productos": [
-        {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
-          "categoria": "Ropa Casual",
-          "cantidad": 90,
-          "diferencia": 2
+          "id": "89024a4c-4b37-4c8f-b212-b982659ba8db",
+          "nombre": "Producto 2",
+          "precio": 19,
+          "cantidad": 6,
+          "categoria": "Ropa Interior",
+          "diferencia": 5
         },
         {
-          "id": "4",
-          "nombre": "Chaqueta de Cuero",
-          "precio": 120,
-          "categoria": "Abrigos",
-          "cantidad": 22,
-          "diferencia": 2
+          "id": "45e9602f-8f16-4764-8f12-b1ca6e29e2c2",
+          "nombre": "Producto 3",
+          "precio": 12,
+          "cantidad": 12,
+          "categoria": "Nuevita",
+          "diferencia": -4
         }
       ]
-    },
-    {
-      "id": null,
-      "fecha": "2024-11-12T16:07:30.775Z",
-      "productos": []
     }
+    
   ]
 }

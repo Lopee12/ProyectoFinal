@@ -1,38 +1,57 @@
-<div class="card">
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre del producto</th>
-                <th>Precio unitario</th>
-                <th>Categoria</th>
-                <!-- <th>Seleccionar Producto</th> -->
 
+<div class="relative mx-10 overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs uppercase bg-blue-500 text-gray-200">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Nombre del producto
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Precio unitario
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Categoria
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Cantidad
+                </th>
+                
             </tr>
         </thead>
 
         <tbody>
-            <tr *ngFor="let producto of listaProductos; let i = index">
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.precio}}</td>
-                <td>{{producto.categoria}}</td>
-                <!-- <td>
-                    <input type="checkbox" #checkbox (change)="seleccionarProducto(i,checkbox)" [checked]="estadoCheckbox[i]">
-                    <a *ngIf = "estadoCheckbox[i]" (click) = "seleccionarProducto(i,checkbox)">Modificar</a>                
-                </td> -->
+            <tr class="bg-white border-b hover:bg-gray-50 dark:bg-blue-950" *ngFor="let producto of listaProductos; let i = index">
+                
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                  {{producto.nombre}}
+                </td>
 
-                <td>
-                    <div class="counter">
-                        <button (click)="restar(i)" class="btn btn-unplus">-</button>
-                        <div class="counter-score">{{ArregloCantidad[i]}}</div>
-                        <button (click)="sumar(i)" class="btn btn-plus">+</button>
-                        <!-- <button type="button" (click)="cargarArregloProductos(ArregloCantidad[i])">Agregar</button> -->
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                  {{producto.precio}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                  {{producto.categoria}}
+                </td>
+
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    <div class="counter flex items-center space-x-2">
+                        <button (click)="restar(i)" class="btn btn-unplus w-8 h-8 flex justify-center items-center bg-gray-100 hover:bg-gray-300 text-gray-900 font-medium rounded-full">-</button>
+                        <div class="counter-score text-center w-10 font-medium text-gray-900  dark:text-white">{{ArregloCantidad[i]}}</div>
+                        <button (click)="sumar(i)" class="btn btn-plus w-8 h-8 flex justify-center items-center bg-gray-100 hover:bg-gray-300 text-gray-9S00 font-medium rounded-full">+</button>
                     </div>
                 </td>
+                
             </tr>
-
+            
         </tbody>
     </table>
 </div>
 
-<button class="submitBtn" type="text" (click)="cargarPedido()">Cargar pedido</button>
-<button type="text" routerLink="/MenuEncargado">Volver al menu</button>
+<div>
+    <button type="submit" (click)="cargarPedido()" 
+                class = "group relative flex justify-center my-5 mx-10 py-2 px-10 
+                border border-transparent text-sm font-medium rounded-md 
+                text-white bg-blue-500 hover:bg-indigo-600 focus:outline-none 
+                focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Cargar pedido</button>
+</div>

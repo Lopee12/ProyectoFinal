@@ -1,32 +1,63 @@
 @for (pedidos of listaPedidos; track $index) {
 
-<div class="card">
-    <p class="card-header">{{pedidos.fecha}}</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Estado</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="relative mx-10 my-6 py-2 px-6 bg-gray-100 hover:bg-gray-200 text-gray-900 font-medium overflow-x-auto shadow-md sm:rounded-lg  dark:bg-blue-950  dark:text-white">
+        <p>Fecha del pedido: {{pedidos.fecha}}</p>
+    </div>
+    
+    <div class="relative mx-10 my-6 overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full table-fixed text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs uppercase bg-blue-500 text-gray-200">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Nombre del producto
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Precio unitario
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Categoria
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Cantidad
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Estado
+                    </th>
+                    
+                </tr>
+            </thead>
+    
+            <tbody>
+
             @for (producto of pedidos.productos; track $index) {
-            <tr>
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.categoria}}</td>
-                <td>{{producto.cantidad}}</td>
-                <td>{{producto.precio}}</td>
-                <td>{{pedidos.estado}}</td>
-            </tr>
-            }
+                <tr class="bg-white border-b hover:bg-gray-50  dark:bg-blue-950">
+                    
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                      {{producto.nombre}}
+                    </td>
+    
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                      {{producto.precio}}
+                    </td>
+    
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white ">
+                      {{producto.categoria}}
+                    </td>
+    
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                        {{producto.cantidad}}
+                    </td>
 
-
-        </tbody>
-    </table>
-</div>
+                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                        {{pedidos.estado}}
+                    </td>
+                </tr>
+            }   
+                
+            </tbody>
+        </table>
+      </div>
 }
 
-<button routerLink ="/MenuEncargado">Volver al menu</button>
+
+

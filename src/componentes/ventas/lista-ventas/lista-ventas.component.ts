@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { VentaService } from '../../../services/venta.service';
-import { venta } from '../../../interfaces/Venta.interface';
+import { Venta } from '../../../interfaces/Venta.interface';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './lista-ventas.component.css',
 })
 export class ListaVentasComponent implements OnInit {
-  listaVentas: venta[] = [];
+  listaVentas: Venta[] = [];
   vs = inject(VentaService);
 
   ngOnInit(): void {
@@ -23,7 +23,6 @@ export class ListaVentasComponent implements OnInit {
     this.vs.getListaVentas().subscribe({
       next: (venta) => {
         this.listaVentas = venta;
-        console.log(this.listaVentas);
       },
       error: (err) => {
         console.log('Error', err);

@@ -3,15 +3,23 @@ import { VentaService } from '../../../services/venta.service';
 import { Producto } from '../../../interfaces/Producto.interface';
 import { ProductoService } from '../../../services/producto.service';
 import { CommonModule } from '@angular/common';
-import { venta } from '../../../interfaces/Venta.interface';
-import { FormBuilder } from '@angular/forms';
+import { Venta } from '../../../interfaces/Venta.interface';
 import { RouterModule } from '@angular/router';
 import * as uuid from 'uuid';
+import { AuthService } from '../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { HeaderTableComponent } from '../../ui/header-table/header-table.component';
 
 @Component({
   selector: 'app-nueva-venta',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    HeaderTableComponent,
+  ],
   templateUrl: './nueva-venta.component.html',
   styleUrl: './nueva-venta.component.css',
 })
@@ -22,17 +30,29 @@ export class NuevaVentaComponent implements OnInit {
 
   listaProductos: Producto[] = [];
   listaProductosVenta: number[] = [];
+  campoOrden: keyof Producto | null = null;
+  esAscendente: boolean = true;
+  listaFiltradaProductos: Producto[] = [];
+  listaCategorias: string[] = [];
+  fb = inject(FormBuilder);
 
-  setThisVenta() {
+  auth = inject(AuthService);
+  toastr = inject(ToastrService);
+
+  filtroForm = this.fb.nonNullable.group({
+    categoria: [''],
+  });
+
+  setThisVenta(): Venta {
     return {
       id: uuid.v4(),
       fecha: new Date().toLocaleDateString('es-ES'),
       total: 0,
       productos: [],
+      vendedor: this.auth.getUserName() || '',
     };
   }
-  venta: venta = this.setThisVenta();
-
+  venta: Venta = this.setThisVenta();
   pt = inject(ProductoService);
   vt = inject(VentaService);
 
@@ -40,10 +60,32 @@ export class NuevaVentaComponent implements OnInit {
     this.pt.getProductos().subscribe({
       next: (prod) => {
         this.listaProductos = prod;
+        this.listaFiltradaProductos = prod;
+        this.extraerCategorias();
       },
       error: (err) => {
-        console.log('Error', err);
+        this.toastr.error(err.message, 'Error');
       },
+    });
+  }
+
+  ordenarPor(campo: keyof Producto) {
+    if (this.campoOrden === campo) {
+      this.esAscendente = !this.esAscendente;
+    } else {
+      this.campoOrden = campo;
+      this.esAscendente = true;
+    }
+    this.listaProductos.sort((a, b) => {
+      const valorA = a[campo];
+      const valorB = b[campo];
+      if (valorA === null || valorA === undefined)
+        return this.esAscendente ? 1 : -1;
+      if (valorB === null || valorB === undefined)
+        return this.esAscendente ? -1 : 1;
+      if (valorA < valorB) return this.esAscendente ? -1 : 1;
+      if (valorA > valorB) return this.esAscendente ? 1 : -1;
+      return 0;
     });
   }
 
@@ -85,7 +127,7 @@ export class NuevaVentaComponent implements OnInit {
       })
       .filter((producto) => producto.cantidad > 0);
     if (this.venta.productos.length === 0) {
-      console.log('No hay productos para vender');
+      this.toastr.error('No hay productos para vender', 'Error');
       return;
     }
 
@@ -102,19 +144,45 @@ export class NuevaVentaComponent implements OnInit {
                   this.getListaProductos();
                 },
                 error: (err) => {
-                  console.log('Error al actualizar stock', err);
+                  this.toastr.error('Error al actualizar el stock', 'Error');
                 },
               });
             },
             error: (err) => {
-              console.log('Error al obtener producto', err);
+              this.toastr.error('Error al obtener el producto', 'Error');
             },
           });
         });
+        this.toastr.success(
+          'Venta generada correctamente y stock actualizado',
+          'Exito'
+        );
       },
       error: (err) => {
-        console.log('Error', err);
+        this.toastr.error(err.message, 'Error');
       },
     });
+  }
+
+  extraerCategorias() {
+    this.listaCategorias = Array.from(
+      new Set(this.listaProductos.map((producto) => producto.categoria))
+    );
+  }
+
+  filtrarPorCategoria() {
+    const categoriaSeleccionada = this.filtroForm.get('categoria')?.value;
+    if (categoriaSeleccionada) {
+      this.listaFiltradaProductos = this.listaProductos.filter(
+        (producto) => producto.categoria === categoriaSeleccionada
+      );
+    } else {
+      this.listaFiltradaProductos = [...this.listaProductos];
+    }
+  }
+
+  resetearFiltros() {
+    this.filtroForm.reset();
+    this.listaFiltradaProductos = [...this.listaProductos];
   }
 }

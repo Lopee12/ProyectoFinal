@@ -5,7 +5,6 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { ROLES } from '../enum/roles';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,6 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): boolean {
     if (this.authService.isAuthenticatedUser()) {
-      // Define permisos de acceso para cada ruta.
       const allowedRoles = route.data['roles'] as string[];
       if (
         !allowedRoles ||
@@ -28,8 +26,6 @@ export class AuthGuard implements CanActivate {
         return true;
       }
     }
-    // Redirige al usuario a la página de inicio de sesión si no tiene acceso.
-    // Puedes usar window.location.href o router.navigate según tus necesidades.
     window.location.href = '/login';
     return false;
   }

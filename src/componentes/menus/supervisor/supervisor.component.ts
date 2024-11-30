@@ -4,6 +4,7 @@ import { Pedido } from '../../../interfaces/Pedido.interface';
 import { PedidoService } from '../../../services/pedido.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-supervisor',
@@ -17,6 +18,7 @@ export class SupervisorComponent {
   listaPedidos: Pedido[] = [];
   selects: boolean[] = [];
   modifyEstado: boolean[] = [];
+  toastr = inject(ToastrService);
 
   ngOnInit(): void {
     this.mostrarLista();
@@ -28,7 +30,7 @@ export class SupervisorComponent {
         this.listaPedidos = pedido;
       },
       error: (err) => {
-        console.log('Error', err);
+        this.toastr.error(err.message, 'Error');
       },
     });
   }
@@ -36,10 +38,10 @@ export class SupervisorComponent {
   modficarPedido(ped: Pedido) {
     this.listaPedidosService.putPedido(ped).subscribe({
       next: () => {
-        console.log('Actualizado el estado correctamente');
+        this.toastr.success('Estado actualizado correctamente','Exito');
       },
       error: (err) => {
-        console.log(err.message);
+        this.toastr.error(err.message, 'Error');
       },
     });
   }

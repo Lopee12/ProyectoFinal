@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductoService } from '../../../services/producto.service';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cargar-remito',
@@ -19,6 +20,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './cargar-remito.component.html',
   styleUrl: './cargar-remito.component.css',
 })
+
 export class CargarRemitoComponent implements OnInit {
   constructor(
     private productoService: ProductoService,
@@ -32,6 +34,7 @@ export class CargarRemitoComponent implements OnInit {
 
   listaPedidosAceptados: Pedido[] = [];
   nuevaCantidad: number = 0;
+  toastr = inject(ToastrService);
 
   listarPedidosAceptados() {
     this.ts.getPedidosAceptados().subscribe({
@@ -50,7 +53,6 @@ export class CargarRemitoComponent implements OnInit {
   }
 
   cargarProducto(pedido: Pedido) {
-    console.log(pedido);
     pedido.productos.forEach((produ) => {
       if (produ.id) {
         this.productoService.getProductoById(produ.id).subscribe({
@@ -62,25 +64,25 @@ export class CargarRemitoComponent implements OnInit {
             }
             this.productoService.putProducto(producto).subscribe({
               next: (producto) => {
-                console.log('Stock actualizado', producto);
+                this.toastr.success("Stock actualizado","Exito");
                 pedido.estado = 'Entregado';
                 this.ts.putPedido(pedido).subscribe({
                   next: (pedido) => {
-                    console.log('Pedido actualizado', pedido);
+                    this.toastr.success("Pedido actualizado","Exito");
                     this.listarPedidosAceptados();
                   },
                   error: (err) => {
-                    console.log('Error al actualizar pedido', err);
+                    this.toastr.error("Error al acutalizar pedido","Error");
                   },
                 });
               },
               error: (err) => {
-                console.log('Error al acutalizar stock', err);
+                this.toastr.error("Error al acutalizar stock","Error");
               },
             });
           },
           error: (err) => {
-            console.log('Error no se encuentra producto', err);
+            this.toastr.error("Error no se encuentra el producto","Error");
           },
         });
       }

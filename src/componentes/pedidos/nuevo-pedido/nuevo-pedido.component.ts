@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Pedido } from '../../../interfaces/Pedido.interface';
 import { PedidoService } from '../../../services/pedido.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -35,6 +36,7 @@ export class NuevoPedidoComponent {
     productos: [],
   };
 
+  toastr = inject(ToastrService);
   pt = inject(ProductoService);
   fb = inject(FormBuilder);
   ps = inject(PedidoService);
@@ -62,7 +64,6 @@ export class NuevoPedidoComponent {
           (producto) => producto.id !== this.productoSeleccionado.id
         );
       }
-
       this.ArregloCantidad[index] = 0;
       this.productoSeleccionado = null;
       this.estadoCheckbox[index] = false;
@@ -71,7 +72,6 @@ export class NuevoPedidoComponent {
   }
 
   sumar(i: number) {
-    // if ((this.listaProductos[i].cantidad || 0) > this.ArregloCantidad[i]) // limitar la cantidad de productos al stock
     this.productoSeleccionado = { ...this.listaProductos[i] };
     this.ArregloCantidad[i]++;
     this.cargarArregloProductos(this.ArregloCantidad[i]);
@@ -83,60 +83,6 @@ export class NuevoPedidoComponent {
       this.cargarArregloProductos(this.ArregloCantidad[i]);
     }
   }
-
-  // verificarCantidad(): number {
-  //   if (this.productoSeleccionado != null) {
-  //     return this.productoSeleccionado.cantidad;
-  //   }
-  //   return 0;
-  // }
-
-  // validarCantidad(cantidadInput: HTMLInputElement) {
-  //   const max = this.verificarCantidad();
-  //   const valor = +cantidadInput.value;
-  //   const min = 1;
-
-  //   if (valor > max) {
-  //     cantidadInput.value = max.toString();
-  //   }
-
-  //   if (valor <= 0) {
-  //     cantidadInput.value = min.toString();
-  //   }
-  // }
-
-  // validarCantidadInicial(id: number): number | null {
-  //   const index = this.listaProductosPedido.findIndex(
-  //     (producto) => (producto.id = id)
-  //   );
-
-  //   if (index == -1) {
-  //     return 1;
-  //   } else {
-  //     return this.listaProductosPedido[index].cantidad;
-  //   }
-  // }
-
-  // eliminarDatoFormulario() {
-  //   if (this.mostrarFormulario && this.productoSeleccionado != null) {
-  //     const index = this.listaProductos.findIndex(
-  //       (producto) => producto.id === this.productoSeleccionado.id
-  //     );
-
-  //     if (
-  //       this.listaProductosPedido.some(
-  //         (producto) => producto.id === this.productoSeleccionado.id
-  //       )
-  //     ) {
-  //       this.listaProductosPedido = this.listaProductosPedido.filter(
-  //         (producto) => producto.id != this.productoSeleccionado.id
-  //       );
-  //     }
-
-  //     this.estadoCheckbox[index] = false;
-  //     this.mostrarFormulario = !this.mostrarFormulario;
-  //   }
-  // }
 
   cargarArregloProductos(cantidad: number) {
     if (this.productoSeleccionado != null) {
@@ -156,7 +102,6 @@ export class NuevoPedidoComponent {
 
       this.ArregloCantidad[indice] = cantidad;
       this.estadoCheckbox[indice] = true;
-      //this.mostrarInput[indice] = !this.mostrarInput;
     }
   }
 
@@ -178,14 +123,15 @@ export class NuevoPedidoComponent {
 
       this.ps.postPedido(this.pedido).subscribe({
         next: () => {
-          alert('Se ingreso correctamente');
+          this.ArregloCantidad = Array(this.listaProductos.length).fill(0);
+          this.toastr.success('Se ingreso correctamente');
         },
         error: (err) => {
           console.log('Error', err);
         },
       });
     } else {
-      alert('No se ha cargado ningun producto a la venta');
+      this.toastr.error('No se ha cargado ningun producto a la venta');
     }
   }
 }

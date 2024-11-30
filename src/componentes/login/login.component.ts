@@ -2,14 +2,15 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule, Router } from '@angular/router';
 import { Usuario } from '../../interfaces/Usuario.interface';
-import { UsuarioService } from '../../services/usuario.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
+import { LogoComponent } from '../ui/logo/logo.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule],
+  imports: [RouterModule, ReactiveFormsModule, CommonModule, LogoComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  toastr = inject(ToastrService);
   fb = inject(FormBuilder);
   listaUsuarios: Usuario[] = [];
 
@@ -31,7 +33,10 @@ export class LoginComponent implements OnInit {
   });
 
   ingresarUsuarioYContrasena() {
-    if (this.formulario.invalid) return;
+    if (this.formulario.invalid) {
+      this.toastr.error('Usuario o contraseña incorrectos');
+      return;
+    }
 
     const { nombre, contrasena } = this.formulario.getRawValue();
     this.logService.login(nombre, contrasena);
