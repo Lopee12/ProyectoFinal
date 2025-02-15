@@ -38,8 +38,6 @@ export class NuevaVentaComponent implements OnInit {
 
    // Mapa para relacionar el id del producto con la cantidad seleccionada
   productosSeleccionados: { [id: string]: number } = {};
-
-  listaProductosVenta: number[] = [];
   
   //Inyecciones de dependencias
   
