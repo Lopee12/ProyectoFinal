@@ -56,7 +56,7 @@ export class ListaProductosComponent implements OnInit {
     this.productosService.getProductos().subscribe({
       next: (prod) => {
         this.listaProductos = prod;
-        this.listaFiltradaProductos = prod;
+        this.listaFiltradaProductos =[...prod];
         this.extraerCategorias();
       },
 
@@ -89,20 +89,24 @@ export class ListaProductosComponent implements OnInit {
       this.esAscendente = true;
     }
 
-    this.listaProductos.sort((a, b) => {
-      const valorA = a[campo];
-      const valorB = b[campo];
-
-      if (valorA === null || valorA === undefined)
-        return this.esAscendente ? 1 : -1;
-      if (valorB === null || valorB === undefined)
-        return this.esAscendente ? -1 : 1;
-
-      if (valorA < valorB) return this.esAscendente ? -1 : 1;
-      if (valorA > valorB) return this.esAscendente ? 1 : -1;
-      return 0;
-    });
+    this.aplicarOrdenamiento();
   }
+
+  aplicarOrdenamiento() {
+    if (this.campoOrden) {
+      this.listaFiltradaProductos.sort((a, b) => {
+        const valorA = a[this.campoOrden!];
+        const valorB = b[this.campoOrden!];
+
+        if (valorA === null || valorA === undefined) return this.esAscendente ? 1 : -1;
+        if (valorB === null || valorB === undefined) return this.esAscendente ? -1 : 1;
+        if (valorA < valorB) return this.esAscendente ? -1 : 1;
+        if (valorA > valorB) return this.esAscendente ? 1 : -1;
+        return 0;
+      });
+    }
+  }
+
 
   extraerCategorias() {
     this.listaCategorias = Array.from(
@@ -119,6 +123,9 @@ export class ListaProductosComponent implements OnInit {
     } else {
       this.listaFiltradaProductos = [...this.listaProductos];
     }
+    if(this.campoOrden) {
+      this.aplicarOrdenamiento();
+    }
   }
 
   filtrarProductos(termino: string) {
@@ -127,10 +134,16 @@ export class ListaProductosComponent implements OnInit {
         producto.nombre.toLowerCase().includes(termino.toLowerCase()) ||
         producto.categoria.toLowerCase().includes(termino.toLowerCase())
     );
+    if(this.campoOrden) {
+      this.aplicarOrdenamiento();
+    }
   }
 
   resetearFiltros() {
     this.filtroForm.reset();
     this.listaFiltradaProductos = [...this.listaProductos];
+    if(this.campoOrden) {
+      this.aplicarOrdenamiento();
+    }
   }
 }

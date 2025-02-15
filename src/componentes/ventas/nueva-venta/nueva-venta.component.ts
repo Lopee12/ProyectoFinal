@@ -28,20 +28,34 @@ export class NuevaVentaComponent implements OnInit {
     this.getListaProductos();
   }
 
+  //Listas y filtros
+
   listaProductos: Producto[] = [];
-  listaProductosVenta: number[] = [];
-  campoOrden: keyof Producto | null = null;
-  esAscendente: boolean = true;
   listaFiltradaProductos: Producto[] = [];
   listaCategorias: string[] = [];
-  fb = inject(FormBuilder);
+  campoOrden: keyof Producto | null = null;
+  esAscendente: boolean = true;
 
+   // Mapa para relacionar el id del producto con la cantidad seleccionada
+  productosSeleccionados: { [id: string]: number } = {};
+
+  listaProductosVenta: number[] = [];
+  
+  //Inyecciones de dependencias
+  
+  fb = inject(FormBuilder);
   auth = inject(AuthService);
   toastr = inject(ToastrService);
+  pt = inject(ProductoService);
+  vt = inject(VentaService);
+
+  //Formulario para el filtrado
 
   filtroForm = this.fb.nonNullable.group({
     categoria: [''],
   });
+
+  //Inicializando la venta
 
   setThisVenta(): Venta {
     return {
@@ -53,8 +67,6 @@ export class NuevaVentaComponent implements OnInit {
     };
   }
   venta: Venta = this.setThisVenta();
-  pt = inject(ProductoService);
-  vt = inject(VentaService);
 
   getListaProductos() {
     this.pt.getProductos().subscribe({
@@ -87,25 +99,21 @@ export class NuevaVentaComponent implements OnInit {
       if (valorA > valorB) return this.esAscendente ? 1 : -1;
       return 0;
     });
+
+    this.filtrarPorCategoria();
   }
 
-  sumar(p: Producto, i: number) {
-    if ((p.cantidad ? p.cantidad : 0) > (this.listaProductosVenta[i] | 0)) {
-      if (!this.listaProductosVenta[i]) {
-        this.listaProductosVenta[i] = 1;
-      } else {
-        this.listaProductosVenta[i]++;
-      }
+  sumar(producto: Producto) {
+    const actual = this.productosSeleccionados[producto.id] || 0;
+    if (actual < (producto.cantidad || 0)) {
+      this.productosSeleccionados[producto.id] = actual + 1;
     }
-    this.venta.productos[i] = { ...this.listaProductos[i] };
-    this.venta.productos[i].cantidad = this.listaProductosVenta[i];
   }
 
-  restar(p: Producto, i: number) {
-    if (this.listaProductosVenta[i] > 0) {
-      this.listaProductosVenta[i]--;
-      this.venta.productos[i] = { ...this.listaProductos[i] };
-      this.venta.productos[i].cantidad = this.listaProductosVenta[i];
+  restar(producto: Producto) {
+    const actual = this.productosSeleccionados[producto.id] || 0;
+    if (actual > 0) {
+      this.productosSeleccionados[producto.id] = actual - 1;
     }
   }
 
@@ -117,19 +125,21 @@ export class NuevaVentaComponent implements OnInit {
   }
 
   cargarVenta() {
-    this.calcularTotal();
-    this.venta.productos = this.listaProductos
-      .map((producto, index) => {
-        return {
-          ...producto,
-          cantidad: this.listaProductosVenta[index] || 0,
-        };
-      })
-      .filter((producto) => producto.cantidad > 0);
-    if (this.venta.productos.length === 0) {
+    // Se arma la venta utilizando la lista completa y el mapa de cantidades
+    const productosVenta = this.listaProductos
+      .filter(p => (this.productosSeleccionados[p.id] || 0) > 0)
+      .map(p => ({
+        ...p,
+        cantidad: this.productosSeleccionados[p.id]
+      }));
+
+    if (productosVenta.length === 0) {
       this.toastr.error('No hay productos para vender', 'Error');
       return;
     }
+
+    this.venta.productos = productosVenta;
+    this.calcularTotal();
 
     this.vt.postVenta(this.venta).subscribe({
       next: (ven) => {
@@ -139,7 +149,8 @@ export class NuevaVentaComponent implements OnInit {
               producto.cantidad -= productoVenta.cantidad;
               this.pt.putProducto(producto).subscribe({
                 next: (updatedProducto) => {
-                  this.listaProductosVenta = [];
+                  // Se resetea el mapa de cantidades y la venta luego de la actualización
+                  this.productosSeleccionados = {};
                   this.venta = this.setThisVenta();
                   this.getListaProductos();
                 },

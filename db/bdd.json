@@ -10,7 +10,7 @@
     {
       "nombre": "Shorts Deportivos",
       "precio": 18.99,
-      "cantidad": 99,
+      "cantidad": 97,
       "categoria": "Ropa Deportiva",
       "id": "15",
       "diferencia": 0
@@ -27,7 +27,7 @@
       "id": "17",
       "nombre": "Pijama de Algodón",
       "precio": 35,
-      "cantidad": 5,
+      "cantidad": 0,
       "categoria": "Ropa Interior",
       "diferencia": 0
     },
@@ -44,7 +44,7 @@
       "nombre": "Botas de Montaña",
       "precio": 95.99,
       "categoria": "Calzado",
-      "cantidad": 14,
+      "cantidad": 11,
       "diferencia": 0
     },
     {
@@ -59,7 +59,7 @@
       "id": "e91a1ab6-a728-4e58-926c-9638cd4ca74b",
       "nombre": "Producto Nuevo",
       "precio": 30,
-      "cantidad": 10,
+      "cantidad": 8,
       "categoria": "Ropa Casual",
       "nuevaCategoria": "",
       "diferencia": 0
@@ -334,6 +334,63 @@
           "precio": 70,
           "categoria": "Abrigos",
           "cantidad": 1,
+          "diferencia": 0
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "04782183-0acf-49cd-979f-c89182fdaaae",
+      "fecha": "15/2/2025",
+      "total": 452.96999999999997,
+      "productos": [
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 3,
+          "categoria": "Ropa Interior",
+          "diferencia": 0
+        },
+        {
+          "id": "20",
+          "nombre": "Botas de Montaña",
+          "precio": 95.99,
+          "categoria": "Calzado",
+          "cantidad": 3,
+          "diferencia": 0
+        },
+        {
+          "id": "e91a1ab6-a728-4e58-926c-9638cd4ca74b",
+          "nombre": "Producto Nuevo",
+          "precio": 30,
+          "cantidad": 2,
+          "categoria": "Ropa Casual",
+          "nuevaCategoria": "",
+          "diferencia": 0
+        }
+      ],
+      "vendedor": "juan.martel"
+    },
+    {
+      "id": "820ae5d5-a45d-469a-88bd-bed392e16d08",
+      "fecha": "15/2/2025",
+      "total": 107.97999999999999,
+      "productos": [
+        {
+          "nombre": "Shorts Deportivos",
+          "precio": 18.99,
+          "cantidad": 2,
+          "categoria": "Ropa Deportiva",
+          "id": "15",
+          "diferencia": 0
+        },
+        {
+          "id": "17",
+          "nombre": "Pijama de Algodón",
+          "precio": 35,
+          "cantidad": 2,
+          "categoria": "Ropa Interior",
           "diferencia": 0
         }
       ],
