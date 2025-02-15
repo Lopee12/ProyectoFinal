@@ -33,7 +33,7 @@ export class NuevoProductoComponent implements OnInit {
     id: [uuid.v4()],
     nombre: ['', [Validators.required]],
     precio: [0, [Validators.required, Validators.min(0)]],
-    cantidad: [0, [Validators.required, Validators.min(1)]],
+    cantidad: [0],
     categoria: ['', [Validators.required]],
     nuevaCategoria: ['', [Validators.required]],
     diferencia: [0, [Validators.required]],
