@@ -50,9 +50,131 @@
     },
     {
       "id": "e91a1ab6-a728-4e58-926c-9638cd4ca74b",
-      "nombre": "Producto Nuevo",
+      "nombre": "Jean Azul Dama",
       "precio": 30,
       "cantidad": 8,
+      "categoria": "Ropa Casual",
+      "diferencia": 0
+    },
+    {
+      "id": "b7166e42-96a6-4691-bbbb-1d1040b2b800",
+      "nombre": "Pijama niños",
+      "precio": 20,
+      "cantidad": 30,
+      "categoria": "Ropa Interior",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "8973f230-1ebb-4178-b8ba-6852106d7719",
+      "nombre": "Pijama verano",
+      "precio": 22,
+      "cantidad": 15,
+      "categoria": "Ropa Interior",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "7e2687b9-7c82-48fe-89aa-5e3f5c6c157a",
+      "nombre": "Buzo Algodón",
+      "precio": 30,
+      "cantidad": 70,
+      "categoria": "Ropa Casual",
+      "diferencia": 0
+    },
+    {
+      "id": "2c09d399-cf61-4027-9a94-df3822c64e82",
+      "nombre": "Campera deportiva",
+      "precio": 40,
+      "cantidad": 28,
+      "categoria": "Ropa Deportiva",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "46f7ce81-5bf5-4af3-827e-5976e2c8f592",
+      "nombre": "Zapatos Trabajo",
+      "precio": 50,
+      "cantidad": 10,
+      "categoria": "Calzado",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "53c4623a-5d3c-4653-b1b7-04c6c0127276",
+      "nombre": "Bermuda Hombre",
+      "precio": 26,
+      "cantidad": 40,
+      "categoria": "Ropa Casual",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "fa903747-d743-481d-b847-4bddbfd5ad2d",
+      "nombre": "Campera Cuero",
+      "precio": 50,
+      "cantidad": 50,
+      "categoria": "Abrigos",
+      "diferencia": 0
+    },
+    {
+      "id": "89e102ce-7182-47cf-8120-726169075b92",
+      "nombre": "Campera Polar",
+      "precio": 30,
+      "cantidad": 37,
+      "categoria": "Abrigos",
+      "diferencia": 0
+    },
+    {
+      "id": "cccf284c-a2e0-4c7e-8f50-9a30429ff35a",
+      "nombre": "Pañuelo Dama",
+      "precio": 12,
+      "cantidad": 10,
+      "categoria": "Accesorios",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "a6f8ab0a-b7f6-4bd4-abd0-7e7bc8d516d4",
+      "nombre": "Remera Adidas",
+      "precio": 30,
+      "cantidad": 46,
+      "categoria": "Ropa Deportiva",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "67eb3468-b766-4736-9431-e0b8d45d565b",
+      "nombre": "Pantuflas",
+      "precio": 7.5,
+      "cantidad": 30,
+      "categoria": "Calzado",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "988ad296-6c5d-4fed-9846-51b59fc54700",
+      "nombre": "Botas de Lluvia",
+      "precio": 26,
+      "cantidad": 7,
+      "categoria": "Calzado",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "aed2bc90-ee35-4a96-a51a-48ba7eef2fbb",
+      "nombre": "Buzo Liviano",
+      "precio": 33,
+      "cantidad": 20,
+      "categoria": "Ropa Deportiva",
+      "nuevaCategoria": "",
+      "diferencia": 0
+    },
+    {
+      "id": "0c9f0244-ec62-44f9-9526-62a3841b490b",
+      "nombre": "Remera Niños",
+      "precio": 17,
+      "cantidad": 20,
       "categoria": "Ropa Casual",
       "nuevaCategoria": "",
       "diferencia": 0
