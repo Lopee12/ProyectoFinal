@@ -1128,7 +1128,7 @@
     {
       "id": "0683",
       "fecha": "15/02/2025",
-      "estado": "En espera de confirmacion",
+      "estado": "Aceptado",
       "productos": [
         {
           "id": "16",
@@ -1151,7 +1151,7 @@
     {
       "id": "0f04",
       "fecha": "15/02/2025",
-      "estado": "En espera de confirmacion",
+      "estado": "Aceptado",
       "productos": [
         {
           "nombre": "Shorts Deportivos",
@@ -1189,7 +1189,7 @@
     {
       "id": "c53f",
       "fecha": "15/02/2025",
-      "estado": "En espera de confirmacion",
+      "estado": "Aceptado",
       "productos": [
         {
           "id": "17",
@@ -1197,78 +1197,6 @@
           "precio": 35,
           "cantidad": 2,
           "categoria": "Ropa Interior",
-          "diferencia": 0
-        }
-      ]
-    },
-    {
-      "id": "3e7d",
-      "fecha": "15/02/2025",
-      "estado": "En espera de confirmacion",
-      "productos": [
-        {
-          "id": "1",
-          "nombre": "Camiseta Básica",
-          "precio": 15.99,
-          "cantidad": 4,
-          "categoria": "Ropa Casual",
-          "diferencia": 0
-        },
-        {
-          "nombre": "Shorts Deportivos",
-          "precio": 18.99,
-          "cantidad": 3,
-          "categoria": "Ropa Deportiva",
-          "id": "15",
-          "diferencia": 0
-        },
-        {
-          "id": "16",
-          "nombre": "Bufanda de Lana",
-          "precio": 13,
-          "cantidad": 3,
-          "categoria": "Accesorios",
-          "diferencia": 0
-        },
-        {
-          "id": "17",
-          "nombre": "Pijama de Algodón",
-          "precio": 35,
-          "cantidad": 3,
-          "categoria": "Ropa Interior",
-          "diferencia": 0
-        },
-        {
-          "id": "19",
-          "nombre": "Chaleco Acolchado",
-          "precio": 70,
-          "categoria": "Abrigos",
-          "cantidad": 2,
-          "diferencia": 0
-        },
-        {
-          "id": "20",
-          "nombre": "Botas de Montaña",
-          "precio": 95.99,
-          "categoria": "Calzado",
-          "cantidad": 3,
-          "diferencia": 0
-        },
-        {
-          "id": "4a7671c6-a7fb-4562-9f1e-d18b3aa9604d",
-          "nombre": "Remera Nike",
-          "precio": 20,
-          "cantidad": 4,
-          "categoria": "Ropa Deportiva",
-          "diferencia": 0
-        },
-        {
-          "id": "e91a1ab6-a728-4e58-926c-9638cd4ca74b",
-          "nombre": "Producto Nuevo",
-          "precio": 30,
-          "cantidad": 4,
-          "categoria": "Ropa Casual",
-          "nuevaCategoria": "",
           "diferencia": 0
         }
       ]
