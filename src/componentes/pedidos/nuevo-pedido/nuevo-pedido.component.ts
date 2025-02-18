@@ -85,10 +85,8 @@ export class NuevoPedidoComponent {
 
     const actual = this.productosSeleccionados[producto.id] || 0;
     
-    if (actual < producto.cantidad || 0) {
-      this.productosSeleccionados[producto.id] = actual + 1;
-      this.cargarArregloProductos(this.productosSeleccionados[producto.id]);
-    }
+    this.productosSeleccionados[producto.id] = actual + 1;
+    this.cargarArregloProductos(this.productosSeleccionados[producto.id]);
     
   }
 
@@ -143,7 +141,7 @@ export class NuevoPedidoComponent {
       }));
 
     if (productosPedidos.length === 0) {
-      this.toastr.error('No hay productos para vender', 'Error');
+      this.toastr.error('No hay productos para pedir', 'Error');
       return;
     }
 

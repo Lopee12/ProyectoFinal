@@ -43,7 +43,7 @@ export class ListaUsuarioComponent implements OnInit {
     this.ts.getUsuarios().subscribe({
       next: (usuarios: Usuario[]) => {
         this.listaUsuarios = usuarios;
-        this.listaFiltrada = usuarios;
+        this.listaFiltrada = [...usuarios];
         this.extrarTiposUsuarios();
       },
       error: (e: Error) => {
@@ -64,6 +64,35 @@ export class ListaUsuarioComponent implements OnInit {
     });
   }
 
+  campoOrden: keyof Usuario | null = null;
+  esAscendente: boolean = true;
+
+  ordenarPor(campo: keyof Usuario) {
+    if (this.campoOrden === campo) {
+      this.esAscendente = !this.esAscendente;
+    } else {
+      this.campoOrden = campo;
+      this.esAscendente = true;
+    }
+
+    this.aplicarOrdenamiento();
+  }
+
+  aplicarOrdenamiento() {
+    if (this.campoOrden) {
+      this.listaFiltrada.sort((a, b) => {
+        const valorA = a[this.campoOrden!];
+        const valorB = b[this.campoOrden!];
+
+        if (valorA === null || valorA === undefined) return this.esAscendente ? 1 : -1;
+        if (valorB === null || valorB === undefined) return this.esAscendente ? -1 : 1;
+        if (valorA < valorB) return this.esAscendente ? -1 : 1;
+        if (valorA > valorB) return this.esAscendente ? 1 : -1;
+        return 0;
+      });
+    }
+  }
+
   extrarTiposUsuarios() {
     this.tiposUsuarios = Array.from(
       new Set(this.listaUsuarios.map((usuario) => usuario.tipoUsuario))
@@ -79,35 +108,17 @@ export class ListaUsuarioComponent implements OnInit {
     } else {
       this.listaFiltrada = [...this.listaUsuarios];
     }
+
+    if(this.campoOrden) {
+      this.aplicarOrdenamiento();
+    }
   }
 
   resetearFiltros() {
     this.filtroForm.reset();
     this.listaFiltrada = [...this.listaUsuarios];
-  }
-  campoOrden: keyof Usuario | null = null;
-  esAscendente: boolean = true;
-
-  ordenarPor(campo: keyof Usuario) {
-    if (this.campoOrden === campo) {
-      this.esAscendente = !this.esAscendente;
-    } else {
-      this.campoOrden = campo;
-      this.esAscendente = true;
+    if(this.campoOrden) {
+      this.aplicarOrdenamiento();
     }
-
-    this.listaUsuarios.sort((a, b) => {
-      const valorA = a[campo];
-      const valorB = b[campo];
-
-      if (valorA === null || valorA === undefined)
-        return this.esAscendente ? 1 : -1;
-      if (valorB === null || valorB === undefined)
-        return this.esAscendente ? -1 : 1;
-
-      if (valorA < valorB) return this.esAscendente ? -1 : 1;
-      if (valorA > valorB) return this.esAscendente ? 1 : -1;
-      return 0;
-    });
   }
 }
