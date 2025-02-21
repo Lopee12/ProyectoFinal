@@ -1,14 +1,7 @@
-<h1>Menu Encargado</h1>
-
-<section>
-  <ul>
-    <li><a routerLink="/NuevoPedido">Alta de pedidos a fabrica</a></li>
-    <li><a routerLink="/ListaProductos">Visualizar lista de productos</a></li>
-    <li><a routerLink="/ListarPedido">Visualizar estado de pedidos</a></li>
-    <li><a routerLink="/CargarRemito">Cargar remito</a></li>
-    <li><a routerLink="/NuevoReporte">Realizar ajuste del stock</a></li>
-    <li><a routerLink="/ListaReporte">Visualizar lista de reportes</a></li>
-  </ul>
-</section>
-
-<button (click)="logout()">Salir</button>
+@for (vendedorData of single; track $index) {
+<div class="mt-2 flex flex-col items-center bg-blue-50 rounded-xl w-fit">
+  <h2 class="mt-2">{{vendedorData.name}}</h2>
+  <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="vendedorData.series">
+  </ngx-charts-advanced-pie-chart>
+</div>
+}

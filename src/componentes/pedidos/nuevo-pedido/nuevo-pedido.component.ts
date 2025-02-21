@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Pedido } from '../../../interfaces/Pedido.interface';
 import { PedidoService } from '../../../services/pedido.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nuevo-pedido',
@@ -21,13 +22,18 @@ export class NuevoPedidoComponent {
 
   listaProductos: Producto[] = [];
   listaProductosPedido: Producto[] = [];
+  listaFiltradaProductos: Producto[] = [];
+  listaCategorias: string[] = [];
+
+  // Mapa para relacionar el id del producto con la cantidad seleccionada
+  productosSeleccionados: { [id: string]: number } = {};
 
   mostrarFormulario: boolean = false;
   productoSeleccionado: any = null;
   producto: any = null;
   estadoCheckbox: boolean[] = [];
   mostrarInput: boolean[] = [];
-  ArregloCantidad: number[] = [];
+  
 
   pedido: Pedido = {
     fecha: '',
@@ -35,15 +41,21 @@ export class NuevoPedidoComponent {
     productos: [],
   };
 
+  toastr = inject(ToastrService);
   pt = inject(ProductoService);
   fb = inject(FormBuilder);
   ps = inject(PedidoService);
+
+  filtroForm = this.fb.nonNullable.group({
+    categoria: [''],
+  });
 
   getListaProductos() {
     this.pt.getProductos().subscribe({
       next: (prod) => {
         this.listaProductos = prod;
-        this.ArregloCantidad = Array(this.listaProductos.length).fill(0);
+        this.listaFiltradaProductos = prod;
+        this.extraerCategorias();
       },
       error: (err) => {
         console.log('Error', err);
@@ -63,80 +75,29 @@ export class NuevoPedidoComponent {
         );
       }
 
-      this.ArregloCantidad[index] = 0;
       this.productoSeleccionado = null;
       this.estadoCheckbox[index] = false;
       this.mostrarInput[index] = false;
     }
   }
 
-  sumar(i: number) {
-    // if ((this.listaProductos[i].cantidad || 0) > this.ArregloCantidad[i]) // limitar la cantidad de productos al stock
-    this.productoSeleccionado = { ...this.listaProductos[i] };
-    this.ArregloCantidad[i]++;
-    this.cargarArregloProductos(this.ArregloCantidad[i]);
+  sumar(producto: Producto) {
+
+    const actual = this.productosSeleccionados[producto.id] || 0;
+    
+    this.productosSeleccionados[producto.id] = actual + 1;
+    this.cargarArregloProductos(this.productosSeleccionados[producto.id]);
+    
   }
-  restar(i: number) {
-    if (this.ArregloCantidad[i] > 0) {
-      this.productoSeleccionado = { ...this.listaProductos[i] };
-      this.ArregloCantidad[i]--;
-      this.cargarArregloProductos(this.ArregloCantidad[i]);
+
+  restar(producto: Producto) {
+
+    const actual = this.productosSeleccionados[producto.id] || 0;
+    if (actual > 0) {
+      this.productosSeleccionados[producto.id] = actual - 1;
+      this.cargarArregloProductos(this.productosSeleccionados[producto.id]);
     }
   }
-
-  // verificarCantidad(): number {
-  //   if (this.productoSeleccionado != null) {
-  //     return this.productoSeleccionado.cantidad;
-  //   }
-  //   return 0;
-  // }
-
-  // validarCantidad(cantidadInput: HTMLInputElement) {
-  //   const max = this.verificarCantidad();
-  //   const valor = +cantidadInput.value;
-  //   const min = 1;
-
-  //   if (valor > max) {
-  //     cantidadInput.value = max.toString();
-  //   }
-
-  //   if (valor <= 0) {
-  //     cantidadInput.value = min.toString();
-  //   }
-  // }
-
-  // validarCantidadInicial(id: number): number | null {
-  //   const index = this.listaProductosPedido.findIndex(
-  //     (producto) => (producto.id = id)
-  //   );
-
-  //   if (index == -1) {
-  //     return 1;
-  //   } else {
-  //     return this.listaProductosPedido[index].cantidad;
-  //   }
-  // }
-
-  // eliminarDatoFormulario() {
-  //   if (this.mostrarFormulario && this.productoSeleccionado != null) {
-  //     const index = this.listaProductos.findIndex(
-  //       (producto) => producto.id === this.productoSeleccionado.id
-  //     );
-
-  //     if (
-  //       this.listaProductosPedido.some(
-  //         (producto) => producto.id === this.productoSeleccionado.id
-  //       )
-  //     ) {
-  //       this.listaProductosPedido = this.listaProductosPedido.filter(
-  //         (producto) => producto.id != this.productoSeleccionado.id
-  //       );
-  //     }
-
-  //     this.estadoCheckbox[index] = false;
-  //     this.mostrarFormulario = !this.mostrarFormulario;
-  //   }
-  // }
 
   cargarArregloProductos(cantidad: number) {
     if (this.productoSeleccionado != null) {
@@ -154,9 +115,8 @@ export class NuevoPedidoComponent {
         this.listaProductosPedido[index].cantidad = cantidad;
       }
 
-      this.ArregloCantidad[indice] = cantidad;
+      
       this.estadoCheckbox[indice] = true;
-      //this.mostrarInput[indice] = !this.mostrarInput;
     }
   }
 
@@ -171,21 +131,55 @@ export class NuevoPedidoComponent {
   }
 
   cargarPedido() {
-    if (this.listaProductosPedido.length != 0) {
-      this.pedido.fecha = this.obtenerFechaActual();
-      this.pedido.productos = [...this.listaProductosPedido];
-      this.pedido.estado = 'En espera de confirmacion';
 
-      this.ps.postPedido(this.pedido).subscribe({
+    // Se arma el pedido utilizando la lista completa y el mapa de cantidades
+    const productosPedidos = this.listaProductos
+      .filter(p => (this.productosSeleccionados[p.id] || 0) > 0)
+      .map(p => ({
+        ...p,
+        cantidad: this.productosSeleccionados[p.id]
+      }));
+
+    if (productosPedidos.length === 0) {
+      this.toastr.error('No hay productos para pedir', 'Error');
+      return;
+    }
+
+    this.pedido.fecha = this.obtenerFechaActual();
+    this.pedido.productos = [...productosPedidos];
+    this.pedido.estado = 'En espera de confirmacion';      
+
+    this.ps.postPedido(this.pedido).subscribe({
         next: () => {
-          alert('Se ingreso correctamente');
+          this.productosSeleccionados = {};
+          this.toastr.success('Se ingreso correctamente');
         },
         error: (err) => {
           console.log('Error', err);
         },
-      });
+    });
+
+  }
+
+  extraerCategorias() {
+    this.listaCategorias = Array.from(
+      new Set(this.listaProductos.map((producto) => producto.categoria))
+    );
+  }
+
+  filtrarPorCategoria() {
+    const categoriaSeleccionada = this.filtroForm.get('categoria')?.value;
+    if (categoriaSeleccionada) {
+      this.listaFiltradaProductos = this.listaProductos.filter(
+        (producto) => producto.categoria === categoriaSeleccionada
+      );
     } else {
-      alert('No se ha cargado ningun producto a la venta');
+      this.listaFiltradaProductos = [...this.listaProductos];
     }
+  }
+
+  resetearFiltros() {
+    this.filtroForm.reset();
+    this.listaFiltradaProductos = [...this.listaProductos];
   }
 }

@@ -5,38 +5,69 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Pedido } from '../../../interfaces/Pedido.interface';
 import { PedidoService } from '../../../services/pedido.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProductoService } from '../../../services/producto.service';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cargar-remito',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
   templateUrl: './cargar-remito.component.html',
   styleUrl: './cargar-remito.component.css',
 })
+
 export class CargarRemitoComponent implements OnInit {
   constructor(
     private productoService: ProductoService,
     private ts: PedidoService
   ) {}
+
   @ViewChild('inputRecibido') inputRecibido!: ElementRef;
 
   ngOnInit(): void {
     this.listarPedidosAceptados();
+    this.cargarAnios();
   }
 
+  
   listaPedidosAceptados: Pedido[] = [];
+  listaPedidosFiltrados: Pedido[] = [];
+  anios: number[] = [];
   nuevaCantidad: number = 0;
+  toastr = inject(ToastrService);
+  fb = inject(FormBuilder);
+
+  meses = [
+    { valor: 1, nombre: 'Enero' },
+    { valor: 2, nombre: 'Febrero' },
+    { valor: 3, nombre: 'Marzo' },
+    { valor: 4, nombre: 'Abril' },
+    { valor: 5, nombre: 'Mayo' },
+    { valor: 6, nombre: 'Junio' },
+    { valor: 7, nombre: 'Julio' },
+    { valor: 8, nombre: 'Agosto' },
+    { valor: 9, nombre: 'Septiembre' },
+    { valor: 10, nombre: 'Octubre' },
+    { valor: 11, nombre: 'Noviembre' },
+    { valor: 12, nombre: 'Diciembre' },
+  ];
+
+  filtroForm = this.fb.nonNullable.group({
+    mes: [''],
+    anio: [''],
+  });
 
   listarPedidosAceptados() {
     this.ts.getPedidosAceptados().subscribe({
       next: (pedidos) => {
         this.listaPedidosAceptados = pedidos;
+        this.listaPedidosFiltrados = pedidos;
       },
       error: (err) => {
         console.log('Error', err);
@@ -50,7 +81,6 @@ export class CargarRemitoComponent implements OnInit {
   }
 
   cargarProducto(pedido: Pedido) {
-    console.log(pedido);
     pedido.productos.forEach((produ) => {
       if (produ.id) {
         this.productoService.getProductoById(produ.id).subscribe({
@@ -62,28 +92,56 @@ export class CargarRemitoComponent implements OnInit {
             }
             this.productoService.putProducto(producto).subscribe({
               next: (producto) => {
-                console.log('Stock actualizado', producto);
+                this.toastr.success("Stock actualizado","Exito");
                 pedido.estado = 'Entregado';
                 this.ts.putPedido(pedido).subscribe({
                   next: (pedido) => {
-                    console.log('Pedido actualizado', pedido);
+                    this.toastr.success("Pedido actualizado","Exito");
                     this.listarPedidosAceptados();
                   },
                   error: (err) => {
-                    console.log('Error al actualizar pedido', err);
+                    this.toastr.error("Error al acutalizar pedido","Error");
                   },
                 });
               },
               error: (err) => {
-                console.log('Error al acutalizar stock', err);
+                this.toastr.error("Error al acutalizar stock","Error");
               },
             });
           },
           error: (err) => {
-            console.log('Error no se encuentra producto', err);
+            this.toastr.error("Error no se encuentra el producto","Error");
           },
         });
       }
     });
+  }
+
+  cargarAnios() {
+    const anioActual = new Date().getFullYear();
+    for (let i = anioActual; i >= anioActual - 10; i--) {
+      this.anios.push(i);
+    }
+  }
+
+  aplicarFiltro() {
+    const { mes, anio } = this.filtroForm.value;
+
+    if (mes && anio) {
+      this.listaPedidosFiltrados = this.listaPedidosAceptados.filter((pedido) => {
+        // Dividir la fecha "dd/MM/yyyy"
+        const [dia, mesPedido, anioPedido] = pedido.fecha.split('/').map(Number);
+        return mesPedido === parseInt(mes, 10) && anioPedido === parseInt(anio, 10);
+      });
+    } else {
+      this.listaPedidosFiltrados = [...this.listaPedidosAceptados];
+    }
+  }
+
+  resetearFiltros() {
+
+    this.filtroForm.reset();
+    this.listaPedidosFiltrados = [...this.listaPedidosAceptados];
+
   }
 }

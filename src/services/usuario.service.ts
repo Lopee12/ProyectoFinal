@@ -19,6 +19,9 @@ export class UsuarioService {
       `${this.url}?nombreUsuario=${nombreUsuario}`
     );
   }
+  getVendedores(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.url}?tipoUsuario=vendedor`);
+  }
 
   postUsuario(usuario: Usuario): Observable<Usuario> {
     return this.http.post<Usuario>(this.url, usuario);

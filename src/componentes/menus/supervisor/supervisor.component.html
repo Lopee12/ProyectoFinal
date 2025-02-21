@@ -1,50 +1,61 @@
-<div class="contenedor">
-    <table class="tablaProd">
-        <thead>
+<div class="relative mx-10 overflow-x-auto shadow-md sm:rounded-lg my-6 ">
+    <table class="w-full table-fixed text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs uppercase bg-blue-500 text-gray-200">
             <tr>
-                <th>Fecha</th>
-                <th>Estado del pedido</th>
-                <th>
-                    Productos
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Cantidad</th>
-                                <th>Precio</th>
-                            </tr>
-                        </thead>
-                    </table>
+                <th scope="col" class="px-6 py-3">
+                    Fecha
                 </th>
-
+                <th scope="col" class="px-6 py-3">
+                    Estado del pedido
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Productos
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Acciones
+                </th>
             </tr>
         </thead>
 
 
         <tbody>
-            <tr *ngFor="let pedidos of listaPedidos; let i = index">
-                <td>{{pedidos.fecha}}</td>
-                <td>{{pedidos.estado}}</td>
-                <table>
-                    <tbody>
-                        <tr *ngFor="let producto of pedidos.productos">
-                            <td>{{producto.nombre}} </td>
-                            <td>{{producto.cantidad}} </td>
-                            <td>{{producto.precio}} </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <tr *ngFor="let pedidos of listaPedidos; let i = index "
+                class="bg-white border-b hover:bg-gray-50  dark:bg-blue-950">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{pedidos.fecha}}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    {{pedidos.estado}}
+                </td>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    <table>
+                        <ul>
+                            @for (producto of pedidos.productos; track $index) {
+                            <li>
+                                {{producto.cantidad + "x " + producto.nombre}}
+                            </li>
+                            }
+                        </ul>
+                    </table>
+                </td>
 
-                <td>
-                    <div *ngIf="valorEstado(pedidos.estado,i)">
-                        <a (click)="cambiarEstadoAceptacion(i)">Aceptar </a>
-                        <a (click)="cambiarEstadoRechazo(i)">Rechazar</a>
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  dark:text-white">
+                    <div class="flex" *ngIf="valorEstado(pedidos.estado,i)">
+                        <a class="cursor-pointer" (click)="cambiarEstadoAceptacion(i)">
+                            <svg class="h-10 w-10 fill-green-400 mx-1" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" width="80px" height="80px" viewBox="0 0 24 24">
+                                <path
+                                    d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Zm5.676,8.237-6,5.5a1,1,0,0,1-1.383-.03l-3-3a1,1,0,1,1,1.414-1.414l2.323,2.323,5.294-4.853a1,1,0,1,1,1.352,1.474Z" />
+                            </svg> </a>
+                        <a class="cursor-pointer" (click)="cambiarEstadoRechazo(i)">
+                            <svg class="h-10 w-10 fill-red-400 mx-1" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" width="80px" height="80px" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />
+                            </svg></a>
                     </div>
-
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
-
-<button (click)="logout()">Salir</button>

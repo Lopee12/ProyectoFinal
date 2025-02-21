@@ -1,13 +1,7 @@
-<h1>Menu administrador</h1>
-
-<section>
-  <ul>
-    <li> <a routerLink="/AgregarProducto">Alta de producto</a></li>
-    <li> <a routerLink="/ListaProductos">Visualizar lista de productos</a></li>
-    <li> <a routerLink="/NuevoUsuario">Alta de usuarios</a></li>
-    <li> <a routerLink="/ListaUsuarios">Visualizar lista de usuarios</a></li>
-    <li> <a routerLink="/ListaReporte">Visualizar lista de reportes</a></li>
-  </ul>
-</section>
-
-<button (click)="logout()">Salir</button>
+@for (vendedorData of single; track $index) {
+<div class="mt-2 flex flex-col items-center bg-blue-50 rounded-xl w-fit">
+    <h2 class="mt-2">{{vendedorData.name}}</h2>
+    <ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="vendedorData.series">
+    </ngx-charts-advanced-pie-chart>
+</div>
+}

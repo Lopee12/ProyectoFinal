@@ -1,27 +1,67 @@
-# ProyectoFinal
+Proyecto de Inventario en Angular
+Introducción
+Este proyecto es una aplicación web desarrollada en Angular para la gestión de inventarios. Permite a los usuarios realizar un seguimiento de los productos, gestionar el stock y optimizar la organización de un inventario. Es ideal para pequeñas y medianas empresas que desean un sistema eficiente y fácil de usar para administrar sus bienes.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.9.
+Instalación
+Sigue estos pasos para instalar y configurar el proyecto:
 
-## Development server
+Clona el repositorio:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+bash
+Copiar código
+git clone https://github.com/Lopee12/ProyectoFinal.git
+cd nombre-del-repositorio
+Instala las dependencias: Asegúrate de tener instalado Node.js y Angular CLI. Luego ejecuta:
 
-## Code scaffolding
+bash
+Copiar código
+npm install
+Inicia el servidor de desarrollo:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+bash
+Copiar código
+ng serve
+Accede a la aplicación: Abre tu navegador y visita http://localhost:4200.
+cd dbb y ejecutar npm run backend
 
-## Build
+configuracion:
+Al ejecutar el npm run backend podra acceder a los distintos usuarios. Los usuarios seran los siguientes:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Administrador: Usuario: eve.gen  Contraseña:12345
+Vendedor: Usuario: juan.martel contraseña: 12345
+encargado: Usuario: tupi.rodriguez contraseña: 12345
+Fabrica: usuario: nico.lope contraseña: 12345
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Uso
+Agregar productos: Permite añadir nuevos productos al inventario especificando detalles como nombre, cantidad, precio y descripción.
+Actualizar inventario: Edita la información de los productos existentes.
+Eliminar productos: Elimina productos que ya no están disponibles.
+Visualizar inventario: Consulta el listado completo de productos con opciones de búsqueda y filtrado.
+Características
+Gestión completa del inventario.
+Interfaz intuitiva
+Función de búsqueda avanzada.
+Filtrados.
 
-## Running end-to-end tests
+Este proyecto utiliza las siguientes tecnologías y bibliotecas:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Angular: Framework principal para el desarrollo.
+Angular Material: Para la interfaz de usuario.
+RxJS: Manejo de datos reactivos.
+Node.js: Entorno de ejecución.
+Para un listado completo, revisa el archivo package.json.
 
-## Further help
+bash
+Copiar código
+ng serve --port 4300
+Problemas con dependencias: Elimina la carpeta node_modules y reinstala:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+bash
+Copiar código
+rm -rf node_modules
+npm install
+Problemas de compilación: Asegúrate de que la versión de Angular CLI coincida con la versión del proyecto.
+
+Contribuidores
+Nicolas Lopez Osornio - Tupac Rodriguez - Evelyn Gentsch - Juan Cruz Martel
